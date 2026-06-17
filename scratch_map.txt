@@ -1,0 +1,93 @@
+Created At: 2026-06-03T13:30:46Z
+Completed At: 2026-06-03T13:30:46Z
+File Path: `file:///Users/ciarannash/Downloads/Atzengold/atzengold-web-main/src/components/ThreeDMap.tsx`
+Total Lines: 1179
+Total Bytes: 59803
+Showing lines 1 to 800
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import { useState, useMemo, useEffect } from 'react';
+2: import { 
+3:   Building2, 
+4:   MapPin, 
+5:   Search, 
+6:   Volume2, 
+7:   VolumeX, 
+8:   Check, 
+9:   Bell, 
+10:   BellOff, 
+11:   Filter, 
+12:   Flame, 
+13:   RotateCcw,
+14:   Sparkles,
+15:   Utensils,
+16:   PawPrint,
+17:   Compass,
+18:   Layers,
+19:   ShoppingBag,
+20:   Terminal,
+21:   Activity,
+22:   Heart,
+23:   Truck
+24: } from 'lucide-react';
+25: 
+26: const renderSpotIcon = (type: string, isSelectedPin: boolean) => {
+27:   const iconClass = `h-3.5 w-3.5 shrink-0 ${isSelectedPin ? 'text-zinc-950 font-bold' : 'text-amber-500 font-bold'}`;
+28:   if (type === 'Späti') return <ShoppingBag className={iconClass} />;
+29:   if (type === 'Biergarten') return <Compass className={iconClass} />;
+30:   return <Flame className={iconClass} />;
+31: };
+32: import { Venue, City, Language, BeerType, BeerStock } from '../types';
+33: import { translations } from '../constants/translations';
+34: import { motion, AnimatePresence } from 'motion/react';
+35: 
+36: // Pre-defined set of high-quality samplevenues equipped with multiple beer varieties
+37: const INITIAL_VENUES: Venue[] = [
+38:   // Franconia (Fürth / Nuremberg)
+39:   {
+40:     id: 'f1',
+41:     name: 'Atzenhof Braustüberl',
+42:     city: 'Franconia',
+43:     type: 'Biergarten',
+44:     address: 'Atzenhofer Str. 12, 90768 Fürth',
+45:     district: 'Atzenhof',
+46:     amenities: { outdoor: true, dogFriendly: true, food: true },
+47:     stockLevel: 'full',
+48:     beers: [
+49:       { id: 'hell', name: 'Atzengold Hell', stockLevel: 'full' },
+50
+<truncated 37492 bytes>
+el === 'low' ? '🟡 Low' : '🔴 Empty'}
+768:                               </span>
+769: 
+770:                               {/* Manual Stock trigger button */}
+771:                               <button
+772:                                 onClick={() => handleBeerRestock(selectedVenueDetails.id, beer.id)}
+773:                                 className="cursor-pointer bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 hover:text-white font-mono text-[9px] font-semibold px-2 py-0.5 rounded transition-all flex items-center gap-1"
+774:                                 title="Click to mutate stock for simulation feedback"
+775:                               >
+776:                                 ⚡ Update
+777:                               </button>
+778:                             </div>
+779:                           </div>
+780:                         );
+781:                       })}
+782:                     </div>
+783:                   </div>
+784:                 </div>
+785:               )}
+786: 
+787:             </div>
+788: 
+789:           </div>
+790: 
+791:           {/* Interactive Isometric / flat custom map column (Right Side, 7 Cols) */}
+792:           <div className="lg:col-span-7 flex flex-col">
+793:             <div className="relative flex-1 min-h-[480px] lg:min-h-full rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 overflow-hidden flex flex-col justify-between">
+794:               
+795:               {/* Overlay brand logo watermark */}
+796:               <div className="absolute top-5 right-5 pointer-events-none select-none z-10 text-right opacity-15">
+797:                 <p className="text-xl font-black font-sans tracking-tight text-white leading-none">ATZENGOLD</p>
+798:                 <p className="text-[10px] font-mono text-amber-400">MAP SYSTEM // V2.2</p>
+799:               </div>
+800: 
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

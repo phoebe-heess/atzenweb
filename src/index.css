@@ -1,0 +1,429 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-handwritten: "Nerko One", cursive;
+
+  /* ── Official Brand Colors (from product owner) ── */
+  /* brand-forest: #058054  |  brand-cream: #edcea7  |  brand-gold: #d38b0d */
+  /* ── WCAG AAA color system (design.md has full ratio table) ── */
+
+  --color-brand-forest: oklch(0.42 0.13 165.0);
+  --color-brand-cream:  oklch(0.85 0.04 75.0);
+  --color-brand-gold:   oklch(0.65 0.15 75.0);
+
+  /* Light Mode Canvas (brand cream) */
+  --color-canvas: oklch(0.85 0.04 75.0);
+  --color-canvas-soft: oklch(0.88 0.03 75.0);
+
+  /* Light Mode Text — AAA 7:1 on canvas */
+  --color-ink: oklch(0.07 0.05 165.0);
+  --color-ink-secondary: oklch(0.12 0.05 165.0);
+  --color-ink-mute: oklch(0.25 0.06 165.0);
+
+  /* Primary Brand (forest green) */
+  --color-primary: oklch(0.42 0.13 165.0);
+  --color-primary-deep: oklch(0.07 0.05 165.0);
+  --color-primary-press: oklch(0.35 0.12 165.0);
+  --color-primary-soft: oklch(0.42 0.13 165.0 / 0.15);
+  --color-fresh: oklch(0.45 0.18 160.0);
+
+  /* Gold Accent (decorative — NOT for body text) */
+  --color-accent: oklch(0.65 0.15 75.0);
+  --color-accent-hover: oklch(0.58 0.14 75.0);
+  --color-accent-soft: oklch(0.65 0.15 75.0 / 0.15);
+  --color-accent-text: oklch(0.33 0.13 75.0);
+  --color-on-accent: oklch(0.07 0.05 165.0);
+
+  /* Dark Mode */
+  --color-on-primary: oklch(0.88 0.03 75.0);
+  --color-brand-dark-900: oklch(0.15 0.05 165.0);
+
+  /* Utilities */
+  --color-magenta: #B83A3D;
+  --color-hairline: oklch(0.07 0.05 165.0 / 0.08);
+  --color-hairline-input: oklch(0.42 0.13 165.0 / 0.25);
+  --color-shadow-primary: oklch(0.42 0.13 165.0 / 0.15);
+
+}
+
+/* Faded frayed edge wheatpaste glued torn edge dot matrix poster */
+.wheatpaste-poster {
+  position: relative;
+  /* Organic ripped-paper edges using a detailed organic polygon clip-path */
+  clip-path: polygon(
+    /* Top Edge - organic torn shape */
+    0% 2.5%, 6% 1.2%, 12% 4.8%, 18% 1.5%, 25% 3.8%, 32% 0.8%, 40% 5.2%, 48% 1.5%, 55% 4.2%, 62% 0.5%, 70% 4.9%, 78% 1.2%, 85% 3.8%, 92% 0.8%, 100% 3.5%,
+    /* Right Edge - frayed but mostly vertical */
+    98.8% 12%, 100% 25%, 98.5% 38%, 99.6% 50%, 98.2% 63%, 99.8% 76%, 98.5% 88%, 99.5% 100%,
+    /* Bottom Edge - organic deep tears */
+    93% 97.5%, 86% 99.2%, 78% 95.8%, 71% 98.5%, 64% 96.2%, 56% 99.5%, 48% 95.0%, 41% 98.2%, 34% 96.8%, 26% 99.0%, 18% 95.5%, 11% 98.8%, 0% 96.5%,
+    /* Left Edge - frayed */
+    1.2% 88%, 0.2% 75%, 1.5% 62%, 0.4% 50%, 1.8% 37%, 0.8% 25%, 1.5% 12%
+  );
+  /* Organic weathered pulpy paper background texture */
+  background-color: #f5f3eb;
+  background-image: 
+    radial-gradient(circle at 30% 20%, rgba(0,0,0,0.02) 1px, transparent 1.5px),
+    radial-gradient(circle at 75% 60%, rgba(0,0,0,0.03) 1.2px, transparent 1.8px);
+  background-size: 12px 12px, 16px 16px;
+  /* Use drop-shadow filter so the shadow follows the jagged torn edge shape! */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06)) drop-shadow(0 10px 20px rgba(0,0,0,0.1)) contrast(0.92) brightness(0.96) saturate(0.88);
+  transition: filter 0.3s ease;
+}
+
+.wheatpaste-poster:hover {
+  /* Interactive response: feels slightly responsive to hover */
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08)) drop-shadow(0 14px 28px rgba(0,0,0,0.12)) contrast(0.95) brightness(0.98) saturate(0.92);
+}
+
+/* Dot Matrix / Halftone overlay pattern */
+.wheatpaste-poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 0.8px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  z-index: 20;
+}
+
+/* Wrinkled paper texture overlay */
+.wheatpaste-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Subtle white/dark wrinkled lines representing paper creases and 3D folds */
+  background: 
+    linear-gradient(105deg, transparent 46%, rgba(255,255,255,0.08) 47%, rgba(0,0,0,0.12) 48%, transparent 50%),
+    linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.06) 49%, rgba(0,0,0,0.1) 50%, transparent 52%),
+    linear-gradient(175deg, transparent 50%, rgba(255,255,255,0.05) 51%, rgba(0,0,0,0.08) 52%, transparent 54%);
+  background-size: 160px 160px, 200px 200px, 240px 240px;
+  opacity: 0.85;
+  mix-blend-mode: overlay;
+  z-index: 30;
+}
+
+
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink overflow-x-clip antialiased selection:bg-accent selection:text-ink font-sans;
+    /* Apply paper grain texture overlay globally via CSS */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+  
+  html.dark body {
+    @apply bg-primary-deep text-canvas;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    letter-spacing: normal;
+    font-weight: normal;
+    text-transform: none;
+  }
+
+  /* Blackletter/Fraktur fonts must never under any circumstances be uppercase */
+  h1, h2, h3, h4, h5, h6,
+  .font-display,
+  .font-unifraktur,
+  .text-display-xxl,
+  .text-display-xl,
+  .text-display-lg,
+  .text-display-md,
+  .text-heading-lg {
+    text-transform: none !important;
+  }
+
+  /* Core Design.md Typography system classes */
+  .text-display-xxl {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    line-height: 1.0;
+    letter-spacing: normal;
+    font-weight: 400;
+    text-shadow: 1px 1px 0px oklch(0.07 0.05 165.0 / 0.3);
+  }
+  html.dark .text-display-xxl {
+    text-shadow: 1px 1px 0px oklch(0.85 0.04 75.0 / 0.2);
+  }
+  
+  .text-display-xl {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(2rem, 4vw + 0.8rem, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+  .text-display-lg {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+  .text-display-md {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+    line-height: 1.12;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+  .text-heading-lg {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+  .text-heading-md {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-transform: none;
+  }
+  .text-heading-sm {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: none;
+  }
+  .text-body-lg {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .text-body-md {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .text-body-tabular {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    font-feature-settings: "tnum";
+    font-weight: 400;
+  }
+  .text-caption {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+}
+
+/* Custom Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-ink-mute);
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink);
+}
+
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-primary-soft);
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ==========================================
+   PRINT-CULTURE ANIMATIONS
+   ========================================== */
+
+@keyframes flutter {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-1deg) scale(1.01);
+  }
+  75% {
+    transform: rotate(1.5deg) scale(0.99);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes ink-reveal {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes misregistration {
+  0% { text-shadow: 0 0 0 transparent; }
+  20% { text-shadow: -1px 0 0 rgba(0,255,255,0.5), 1px 0 0 rgba(255,0,255,0.5); }
+  40% { text-shadow: 1px 0 0 rgba(0,255,255,0.5), -1px 0 0 rgba(255,0,255,0.5); }
+  60% { text-shadow: -1px 0 0 rgba(0,255,255,0.5), 1px 0 0 rgba(255,0,255,0.5); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+@keyframes gradient-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-flutter {
+  animation: flutter 0.4s ease-in-out;
+}
+
+.animate-ink-reveal {
+  animation: ink-reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-misregistration:hover {
+  animation: misregistration 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Sunburst background from the physical label */
+.bg-sunburst {
+  background: repeating-conic-gradient(
+    from 0deg,
+    var(--color-primary-deep) 0deg 10deg,
+    var(--color-primary) 10deg 20deg
+  );
+}
+
+.bg-sunburst-animated {
+  background: repeating-conic-gradient(
+    from 0deg,
+    var(--color-primary-deep) 0deg 10deg,
+    var(--color-primary) 10deg 20deg
+  );
+  animation: gradient-rotate 60s linear infinite;
+}
+
+html.light .bg-sunburst {
+  background: repeating-conic-gradient(
+    from 0deg,
+    oklch(0.75 0.15 85.0 / 0.20) 0deg 10deg,
+    oklch(0.80 0.16 85.0 / 0.06) 10deg 20deg
+  );
+}
+
+html.light .bg-sunburst-animated {
+  background: repeating-conic-gradient(
+    from 0deg,
+    oklch(0.75 0.15 85.0 / 0.20) 0deg 10deg,
+    oklch(0.80 0.16 85.0 / 0.06) 10deg 20deg
+  );
+  animation: gradient-rotate 60s linear infinite;
+}
+
+/* Utility to add halftone dot pattern overlay to images */
+.halftone-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.15;
+  mix-blend-mode: multiply;
+}
+
+html.dark .halftone-overlay::after {
+  background-image: radial-gradient(var(--color-canvas) 1px, transparent 1px);
+  opacity: 0.1;
+  mix-blend-mode: screen;
+}
+
+/* Custom positioning for the hero sunburst to center exactly on the logo */
+.hero-sunburst {
+  left: 50%;
+  top: 72%;
+}
+
+@media (min-width: 1024px) {
+  .hero-sunburst {
+    left: 72%;
+    top: 50%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-sunburst {
+    left: calc(50% + 320px);
+    top: 50%;
+  }
+}
+
+/* ── Sticker Effect for Timeline Years ── */
+.year-sticker {
+  background:
+    linear-gradient(15deg, transparent 35%, rgba(255, 255, 255, 0.95) 49.5% 50.5%, transparent 65%),
+    linear-gradient(135deg, #ef548f, #ef8b6d, #cfef6b, #3bf0c1, #bb4af0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  -webkit-text-stroke: 0.14em white;
+  paint-order: stroke fill;
+  filter: drop-shadow(0.06em 0.06em 0.04em rgba(0, 0, 0, 0.12));
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

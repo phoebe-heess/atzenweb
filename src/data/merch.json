@@ -1,0 +1,55 @@
+[
+  {
+    "id": "m1",
+    "name": "Atzengold \"Kutscher\" 5-Panel Cap",
+    "price": 24.90,
+    "promoPrice": 22.00,
+    "image": "cap",
+    "images": ["cap"],
+    "description": "Black water-resistant organic canvas with custom gold stenciled \"Atzengold\" raw embroidery. Flat brim style.",
+    "category": "Accessory",
+    "inStock": true
+  },
+  {
+    "id": "m5",
+    "name": "Atzen-Shirt \"Classic Gold\"",
+    "price": 29.90,
+    "image": "shirt",
+    "images": ["shirt"],
+    "description": "100% fine organic ring-spun combed cotton. High-comfort heavyweight streetwear fit featuring the iconic stenciled gold brand crest.",
+    "category": "Apparel",
+    "sizes": ["S", "M", "L", "XL"],
+    "inStock": true
+  },
+  {
+    "id": "m2",
+    "name": "Atzen-Hoodie \"Naturtrüb\" (Oversized)",
+    "price": 69.90,
+    "image": "hoodie",
+    "images": ["hoodie"],
+    "description": "450gsm heavyweight sand-washed organic cotton with original Berlin-Bavaria spray-stencil back print.",
+    "category": "Apparel",
+    "sizes": ["S", "M", "L", "XL"],
+    "inStock": true
+  },
+  {
+    "id": "m3",
+    "name": "Bayerischer Steinkrug (0.5L)",
+    "price": 19.90,
+    "image": "mug",
+    "images": ["mug"],
+    "description": "Handcrafted grey stoneware beer mug which keeps Atzengold Kellerbier cold much longer than glass. Cobalt fired logo.",
+    "category": "Drinkware",
+    "inStock": true
+  },
+  {
+    "id": "m4",
+    "name": "Atzen-Glas Goldrand Edition",
+    "price": 12.90,
+    "image": "glass",
+    "images": ["glass"],
+    "description": "Thin-walled elegant crystal lager glass with real fluid gold rim styling. Elevates yeast citrus aromas.",
+    "category": "Drinkware",
+    "inStock": true
+  }
+]

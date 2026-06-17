@@ -1,0 +1,6 @@
+{
+  "name": "Atzengold",
+  "description": "The official website for Atzengold, an independent Franconian pale lager (Kellerbier) blending traditional brewing with Berlin street culture, featuring a Späti & Kneipe interactive finder, real-time inventory simulator, and frictionless B2B order forms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

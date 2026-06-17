@@ -1,0 +1,11 @@
+# Atzengold Project Style Rules
+
+## Color Space Constraints
+- **Strictly Enforce OKLCH:** All CSS, Tailwind configurations, and inline inline styles MUST use the OKLCH color space (`oklch(L C H)`).
+- **Banned Formats:** Do NOT write hexadecimal color codes (e.g. `#921a22`), rgb(), rgba(), or hsl() functions.
+- **Tailwind v4 usage:** For custom colors in TSX, use Tailwind v4 arbitrary values (e.g., `bg-[oklch(0.375_0.155_24.5)]`) or semantic theme values (e.g., `bg-primary`).
+
+## Typography Constraints
+- **UnifrakturMaguntia:** Display headings and display titles only. Never apply uppercase transform or letter-spacing tracking.
+- **Plus Jakarta Sans:** Primary body copy and standard UI sans-serif text.
+- **JetBrains Mono:** Telemetry, batch logs, coordinates, ABV metrics. Enforce `font-variant-numeric: tabular-nums` for aligned tables.
