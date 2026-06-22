@@ -72,7 +72,8 @@ const ICON_LOOKUP: Record<string, React.ComponentType<{ className?: string }>> =
   'Compass': Compass,
   'Users': Users,
   'Infinity': Infinity,
-  'Award': Award
+  'Award': Award,
+  'Sparkles': Sparkles
 };
 
 interface StoryAndBrewProps {

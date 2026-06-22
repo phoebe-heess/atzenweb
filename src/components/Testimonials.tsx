@@ -1,7 +1,34 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'motion/react';
+import { Star } from 'lucide-react';
 import { TestimonialsColumn, TestimonialType } from '@/components/ui/testimonials-columns-1';
 import { fetchTestimonials } from '../lib/public-api';
+
+// Echte Untappd-Brewery-Statistiken (untappd.com/Atzengold, Stand 22.06.2026).
+// Bei Bedarf manuell aktualisieren, sobald sich die Zahlen auf Untappd ändern.
+const UNTAPPD_STATS = {
+  ratingsCount: 1208,
+  average: 3.41,
+  profileUrl: 'https://untappd.com/Atzengold',
+};
+
+function StarRating({ rating, size = 22 }: { rating: number; size?: number }) {
+  return (
+    <div className="flex gap-1" aria-label={`${rating} von 5 Sternen`}>
+      {Array.from({ length: 5 }).map((_, i) => {
+        const fillPct = Math.max(0, Math.min(1, rating - i)) * 100;
+        return (
+          <span key={i} className="relative inline-block" style={{ width: size, height: size }}>
+            <Star className="absolute inset-0 text-ink/15 dark:text-canvas/20" style={{ width: size, height: size }} />
+            <span className="absolute inset-0 overflow-hidden" style={{ width: `${fillPct}%` }}>
+              <Star className="text-accent fill-accent" style={{ width: size, height: size }} />
+            </span>
+          </span>
+        );
+      })}
+    </div>
+  );
+}
 
 interface RawTestimonial {
   id: string;
@@ -159,6 +186,51 @@ export default function Testimonials({ lang = 'de' }: { lang?: string }) {
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block mt-12" duration={24} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block mt-4" duration={20} />
         </div>
+
+        {/* Untappd Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="relative z-10 mt-16 mx-auto max-w-3xl bg-canvas/90 dark:bg-primary-deep/60 border border-ink/10 dark:border-canvas/15 rounded-2xl shadow-sm px-8 py-8 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12"
+        >
+          <div className="flex flex-col items-center text-center">
+            <span className="text-3xl font-display font-extrabold text-ink dark:text-canvas">
+              {UNTAPPD_STATS.ratingsCount.toLocaleString(lang === 'en' ? 'en-US' : 'de-DE')}
+            </span>
+            <span className="text-xs font-mono uppercase tracking-wider text-ink-secondary dark:text-canvas/60 mt-1">
+              {lang === 'en' ? 'Beers Rated' : 'Biere bewertet'}
+            </span>
+          </div>
+
+          <div className="hidden sm:block w-px h-12 bg-ink/10 dark:bg-canvas/15" />
+
+          <div className="flex flex-col items-center text-center">
+            <StarRating rating={UNTAPPD_STATS.average} />
+            <span className="text-xs font-mono uppercase tracking-wider text-ink-secondary dark:text-canvas/60 mt-2">
+              {lang === 'en'
+                ? `Average Rating (${UNTAPPD_STATS.average.toFixed(2)} / 5)`
+                : `Durchschnitt (${UNTAPPD_STATS.average.toFixed(2).replace('.', ',')} / 5)`}
+            </span>
+          </div>
+
+          <div className="hidden sm:block w-px h-12 bg-ink/10 dark:bg-canvas/15" />
+
+          <a
+            href={UNTAPPD_STATS.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-white border border-ink/15 text-ink font-bold text-sm px-5 py-2.5 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+          >
+            <img
+              src="https://untappd.com/assets/design-system/ut-brand-dark.svg"
+              alt="Untappd"
+              className="h-4 w-auto"
+            />
+            <span>{lang === 'en' ? 'View our Profile' : 'Unser Profil ansehen'}</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
