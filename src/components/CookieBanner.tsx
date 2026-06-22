@@ -147,7 +147,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
   const localT = {
     de: {
       brand: "Atzengold - von der Strasse für die Strasse",
-      title: "Wir schützen Ihre Privatsphäre",
+      title: "Wir schützen deine Privatsphäre",
       desc: "Auf dieser Website kommen Cookies und ähnliche Technologien zum Einsatz, die der Leistungsoptimierung, der Personalisierung von Anzeigen sowie weiteren Marketing- und/oder Analysezwecken dienen können. Über die unten stehenden Funktionen haben Sie die Möglichkeit, Ihr Einwilligungsverhalten zu steuern, also Einwilligungen zu erteilen, zu verweigern oder zu widerrufen.",
       privacy: "Datenschutzerklärung",
       imprint: "Impressum",
@@ -158,7 +158,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
       save: "Speichern",
       decline: "Ablehnen",
       acceptAll: "Alles akzeptieren",
-      powered: "Powered by Usercentrics Consent Management & IT-Recht Kanzlei"
+      powered: "Powered by Usercentrics Consent Management"
     },
     en: {
       brand: "Atzengold - From the Street, For the Street",
@@ -173,7 +173,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
       save: "Save Preferences",
       decline: "Decline All",
       acceptAll: "Accept All Cookies",
-      powered: "Powered by Usercentrics Consent Management & IT-Recht Kanzlei"
+      powered: "Powered by Usercentrics Consent Management"
     }
   };
 
@@ -302,16 +302,16 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
                 onClick={() => setIsDetailsOpen(false)} 
                 className="flex items-center gap-1 text-ink-mute hover:text-ink dark:text-canvas/50 dark:hover:text-canvas font-bold mb-3 cursor-pointer uppercase py-1 transition-colors"
               >
-                <ArrowLeft className="h-3.5 w-3.5" /> Back
+                <ArrowLeft className="h-3.5 w-3.5" /> {lang === 'en' ? 'Back' : 'Zurück'}
               </button>
               <h3 className="font-bold text-sm text-ink dark:text-canvas uppercase border-b border-ink/10 dark:border-canvas/10 pb-1">1. {activeT.essential} Cookies</h3>
-              <p>Essential cookies are needed to render proper application components such as age verification, language session persistence, and selected locations.</p>
-              
+              <p>{lang === 'en' ? 'Essential cookies are needed to render proper application components such as age verification, language session persistence, and selected locations.' : 'Essenzielle Cookies werden benötigt, um zentrale Funktionen wie Altersverifikation, Sprachspeicherung und ausgewählte Standorte korrekt darzustellen.'}</p>
+
               <h3 className="font-bold text-sm text-ink dark:text-canvas uppercase border-b border-ink/10 dark:border-canvas/10 pb-1">2. {activeT.functional} Cookies</h3>
-              <p>Functional cookies track preferred beer choices and UI perspective preferences. This enables the 3D map coordinates to save state.</p>
-              
+              <p>{lang === 'en' ? 'Functional cookies track preferred beer choices and UI perspective preferences. This enables the 3D map coordinates to save state.' : 'Funktionelle Cookies speichern bevorzugte Bierauswahl und UI-Einstellungen. Dadurch können die 3D-Kartenkoordinaten gespeichert werden.'}</p>
+
               <h3 className="font-bold text-sm text-ink dark:text-canvas uppercase border-b border-ink/10 dark:border-canvas/10 pb-1">3. {activeT.marketing} Cookies</h3>
-              <p>Marketing and analytical cookies record real-time inventory tracking notification states to log updates onto your screen and alert on-demand deliveries.</p>
+              <p>{lang === 'en' ? 'Marketing and analytical cookies record real-time inventory tracking notification states to log updates onto your screen and alert on-demand deliveries.' : 'Marketing- und Analyse-Cookies erfassen Echtzeit-Bestandsinformationen, um Updates auf deinem Bildschirm anzuzeigen und bei Bedarf auf Lieferungen hinzuweisen.'}</p>
             </div>
           )}
 

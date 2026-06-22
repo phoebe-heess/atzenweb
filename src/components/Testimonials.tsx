@@ -43,7 +43,7 @@ interface RawTestimonial {
 
 // Echte Untappd-Bewertungen (von Gabriel zugeschickt).
 const dicebearAvatar = (name: string) =>
-  `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=d4af37&textColor=1a1a1a`;
+  `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=d4af37&textColor=2b5240`;
 
 const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   {
@@ -226,7 +226,8 @@ export default function Testimonials({ lang = 'de' }: { lang?: string }) {
             <img
               src="https://untappd.com/assets/design-system/ut-brand-dark.svg"
               alt="Untappd"
-              className="h-4 w-auto shrink-0"
+              className="h-4 w-auto shrink-0 brightness-0"
+              style={{ filter: 'brightness(0) saturate(100%) invert(20%) sepia(15%) saturate(1500%) hue-rotate(110deg) brightness(95%) contrast(90%)' }}
             />
             <span>{lang === 'en' ? 'Our Profile' : 'Unser Profil'}</span>
           </a>

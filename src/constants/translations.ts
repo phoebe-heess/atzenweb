@@ -80,8 +80,8 @@ export const translations = {
     b2bLiveTrackerTitle: "Live Tracker Eintragung",
     b2bLiveTrackerDesc: "Großhandelskonten, die in unserem 3D-Finder gelistet sind, erhalten kostenlosen lokalen GPS-Organikverkehr und Bestandswarnungen.",
     
-    shopTitle: "Der Atzen-Merch Store",
-    shopSubtitle: "Unterstütze die Brand! Da Flaschenversand extrem teuer ist, hol dir unsere limitierten Streetwear-Styles nach Hause.",
+    shopTitle: "Der Atzen-Store",
+    shopSubtitle: "Wir lassen uns immer wieder bescheuerte Ideen einfallen, aber Vorsicht, einige sind streng limitiert ✌️",
     shopAddToCart: "In den Warenkorb",
     shopCartTitle: "Dein Warenkorb",
     shopCartEmpty: "Noch leer – füll ihn auf, Atze!",
@@ -188,8 +188,8 @@ export const translations = {
     b2bLiveTrackerTitle: "Live Tracker Ingress",
     b2bLiveTrackerDesc: "Wholesale accounts listed directly on our 3D Finder receive free local GPS organic traffic routing and stock alert updates.",
     
-    shopTitle: "Atzen Merch Store",
-    shopSubtitle: "Support the startup! Shipping heavy glass bottles across Germany is hard, so buy some high-quality local streetwear gear to spread the vibe.",
+    shopTitle: "The Atzen Store",
+    shopSubtitle: "We keep coming up with ridiculous ideas, but watch out — some of them are strictly limited ✌️",
     shopAddToCart: "Add to Cart",
     shopCartTitle: "Your Cart",
     shopCartEmpty: "Empty – fill it up, mate!",

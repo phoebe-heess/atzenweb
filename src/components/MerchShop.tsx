@@ -7,8 +7,7 @@ import {
   CreditCard, 
   Check, 
   Sparkles, 
-  ShoppingCart, 
-  Info,
+  ShoppingCart,
   Truck,
   Lock,
   ShieldCheck,
@@ -211,16 +210,6 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
             <ShoppingCart className="h-5 w-5" />
             {t.shopCartTitle} ({cart.reduce((a, c) => a + c.quantity, 0)})
           </button>
-        </div>
-
-        {/* Informational startup logistic banner popup info */}
-        <div className="relative mb-12 p-5 rounded-2xl bg-accent/50 dark:bg-accent/20 text-sm font-bold font-sans text-ink dark:text-canvas flex items-start gap-3 max-w-3xl shadow-sm border border-accent dark:border-accent/30">
-          <Info className="h-6 w-6 text-ink dark:text-canvas shrink-0 mt-0.5" />
-          <p>
-            {lang === 'en' 
-              ? 'Atzengold logistics update: Heavy glass crates of actual beer are distributed locally via our physical partner network. Merch items and glassware ship carbon-neutrally via standard DHL to any household across Germany!'
-              : 'Atzengold Logistik-Hinweis: Schwere Glasflaschen-Kisten vertreiben wir klimaschonend vor Ort über unser lokales Späti- und Kneipen-Netzwerk. Unseren limitierten Streetwear-Merch & Gläser schicken wir dir per DHL direkt bis an deine Haustür!'}
-          </p>
         </div>
 
         {/* Shop Listing Grid layout */}

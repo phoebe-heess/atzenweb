@@ -163,21 +163,6 @@ const FALLBACK_VENUES: Venue[] = [
     latitude: 49.4837335
   },
   {
-    id: 'v9',
-    name: 'JK-Security-Systems',
-    type: 'Partner',
-    isGastronomy: false,
-    address: 'Atzenhofer Str. 61, 90768 Fürth',
-    distance: 0,
-    rating: '',
-    isOpen: true,
-    openingHours: 'Reguläre Geschäftszeiten',
-    hasFood: false,
-    dogFriendly: false,
-    longitude: 10.9517724,
-    latitude: 49.505549
-  },
-  {
     id: 'v10',
     name: 'Bierhimmel Gastro Betriebs GmbH',
     type: 'Gastronomie',
@@ -593,26 +578,6 @@ export default function ThreeDMap({ onOpenDatenschutz }: ThreeDMapProps = {}) {
 
                 {/* High-Contrast Toggle Badges */}
                 <div className="pt-2 border-t border-ink/10 dark:border-canvas/10 space-y-3">
-                  <div>
-                    <label className="text-xs font-bold text-ink-mute dark:text-canvas/50 uppercase tracking-widest block mb-2">Betriebsart</label>
-                    <div className="flex flex-wrap gap-2">
-                      <button 
-                        onClick={() => toggleFilter('gastronomy')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.gastronomy ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
-                        aria-pressed={filters.gastronomy}
-                      >
-                        Gastronomie (On-Premise)
-                      </button>
-                      <button 
-                        onClick={() => toggleFilter('retail')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.retail ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
-                        aria-pressed={filters.retail}
-                      >
-                        Einzelhandel (Off-Premise)
-                      </button>
-                    </div>
-                  </div>
-
                   <div>
                     <label className="text-xs font-bold text-ink-mute dark:text-canvas/50 uppercase tracking-widest block mb-2">Zusatzfilter</label>
                     <div className="flex flex-wrap gap-2">

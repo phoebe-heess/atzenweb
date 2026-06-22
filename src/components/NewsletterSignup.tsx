@@ -167,7 +167,7 @@ export default function NewsletterSignup({ lang = 'de', onOpenDatenschutz }: New
                   }}
                   placeholder={t.namePlaceholder}
                   disabled={status === 'loading'}
-                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border-2 border-primary text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                 />
                 <input
                   type="text"
@@ -178,7 +178,7 @@ export default function NewsletterSignup({ lang = 'de', onOpenDatenschutz }: New
                   }}
                   placeholder={t.plzPlaceholder}
                   disabled={status === 'loading'}
-                  className="w-full sm:w-28 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  className="w-full sm:w-28 py-3 px-4 bg-canvas-soft rounded-lg border-2 border-primary text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                 />
                 <input
                   type="email"
@@ -189,7 +189,7 @@ export default function NewsletterSignup({ lang = 'de', onOpenDatenschutz }: New
                   }}
                   placeholder={t.emailPlaceholder}
                   disabled={status === 'loading'}
-                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border-2 border-primary text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                 />
               </div>
 
@@ -201,7 +201,7 @@ export default function NewsletterSignup({ lang = 'de', onOpenDatenschutz }: New
                     setPrivacyAccepted(e.target.checked);
                     if (status === 'error') setStatus('idle');
                   }}
-                  className="mt-0.5 h-4 w-4 rounded border-ink/30 text-primary focus:ring-primary shrink-0"
+                  className="mt-0.5 h-4 w-4 rounded border-2 border-primary text-primary accent-primary focus:ring-primary shrink-0"
                 />
                 <span>
                   {t.privacyLabel}

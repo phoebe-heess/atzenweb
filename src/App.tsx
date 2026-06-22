@@ -381,7 +381,7 @@ export default function App() {
             <div className="flex items-center gap-1.5 sm:gap-2.5 md:gap-3">
               {/* Left Gold Bar Pile Motif */}
               <GoldBarsSVG
-                className="w-8 h-6 sm:w-12 sm:h-9 md:w-15 md:h-11 shrink-0 select-none opacity-90 group-hover:opacity-100 group-hover:[transform:scale(-1.05,1.05)] transition-all filter drop-shadow-[0_0_4px_oklch(0.77_0.155_81.1/0.15)]"
+                className="w-8 h-6 sm:w-12 sm:h-9 md:w-15 md:h-11 shrink-0 select-none opacity-90 group-hover:opacity-100 group-hover:scale-x-[-1.05] group-hover:scale-y-[1.05] transition-all filter drop-shadow-[0_0_4px_oklch(0.77_0.155_81.1/0.15)]"
               />
 
               {/* Main GIF Logo - oversized to break out */}
@@ -395,7 +395,7 @@ export default function App() {
               {/* Right Gold Bar Pile Motif */}
               <GoldBarsSVG
                 mirrored={true}
-                className="w-8 h-6 sm:w-12 sm:h-9 md:w-15 md:h-11 shrink-0 select-none opacity-90 group-hover:opacity-100 group-hover:[transform:scale(1.05)] transition-all filter drop-shadow-[0_0_4px_oklch(0.77_0.155_81.1/0.15)]"
+                className="w-8 h-6 sm:w-12 sm:h-9 md:w-15 md:h-11 shrink-0 select-none opacity-90 group-hover:opacity-100 group-hover:scale-x-[1.05] group-hover:scale-y-[1.05] transition-all filter drop-shadow-[0_0_4px_oklch(0.77_0.155_81.1/0.15)]"
               />
             </div>
           </a>
@@ -841,13 +841,13 @@ export default function App() {
                 {/* Logo block */}
                 <div className="flex flex-col items-center lg:items-start group select-none">
                   <div className="flex items-center gap-1.5 sm:gap-3">
-                    <GoldBarsSVG className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:[transform:scale(-1.05,1.05)] transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
+                    <GoldBarsSVG className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:scale-x-[-1.05] group-hover:scale-y-[1.05] transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
                     <img
                       src="/atzengold-logo.webp"
                       alt="Atzengold Logo"
                       className="h-12 md:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
                     />
-                    <GoldBarsSVG mirrored={true} className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:[transform:scale(1.05)] transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
+                    <GoldBarsSVG mirrored={true} className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:scale-x-[1.05] group-hover:scale-y-[1.05] transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
                   </div>
                   <span className="text-xl sm:text-2xl font-handwritten text-accent mt-3 leading-none">
                     Franken x Berlin
