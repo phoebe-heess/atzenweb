@@ -48,7 +48,7 @@ const dicebearAvatar = (name: string) =>
 const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   {
     id: 't1',
-    name: 'Andreas Opitz',
+    name: 'Andreas O.',
     role: 'Untappd Review',
     textDE: 'Ein richtig geiles handwerkliches Bier. Getreidig-malzig, a bissel Butter, Kellerfeuchte, ein leichter Einschlag von Karamell und Vanille, im Antrunk Fruchtsüße. Weiter so!',
     textEN: 'A really great craft beer. Grainy-malty, a touch of butter, cellar dampness, a light hint of caramel and vanilla, with fruity sweetness on the first sip. Keep it up!',
@@ -58,7 +58,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   },
   {
     id: 't2',
-    name: 'Matthias Ress',
+    name: 'Matthias R.',
     role: 'Untappd Review',
     textDE: 'Süffig. Lecker. Charaktervoll, exotisch. Leicht bitter, hopfig.',
     textEN: 'Smooth drinking. Tasty. Full of character, exotic. Slightly bitter, hoppy.',
@@ -78,7 +78,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   },
   {
     id: 't4',
-    name: 'Matze M',
+    name: 'Matze M.',
     role: 'Untappd Review',
     textDE: 'Sehr süffig, wunderbar weich, getreidig und angenehm malzig.',
     textEN: 'Very smooth drinking, wonderfully soft, grainy and pleasantly malty.',
@@ -88,7 +88,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   },
   {
     id: 't5',
-    name: 'Flo Luis',
+    name: 'Flo L.',
     role: 'Untappd Review',
     textDE: 'Solides Gebräu. Für Helles sogar charakteristische Substanz da, nicht negativ gemeint.',
     textEN: 'Solid brew. Even has notable character for a Helles — meant as a compliment.',
@@ -98,7 +98,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   },
   {
     id: 't6',
-    name: 'Toni Debupi',
+    name: 'Toni D.',
     role: 'Untappd Review',
     textDE: 'Würziges und leckeres Bierchen.',
     textEN: 'A spicy and tasty little beer.',
@@ -108,7 +108,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
   },
   {
     id: 't7',
-    name: 'Julian P',
+    name: 'Julian P.',
     role: 'Untappd Review',
     textDE: "Getreidig-malzig, 'Kellernote', Vanille(pudding) - alles dabei!",
     textEN: "Grainy-malty, a 'cellar note', vanilla (pudding) — it's all there!",
