@@ -52,7 +52,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
     role: 'Untappd Review',
     textDE: 'Ein richtig geiles handwerkliches Bier. Getreidig-malzig, a bissel Butter, Kellerfeuchte, ein leichter Einschlag von Karamell und Vanille, im Antrunk Fruchtsüße. Weiter so!',
     textEN: 'A really great craft beer. Grainy-malty, a touch of butter, cellar dampness, a light hint of caramel and vanilla, with fruity sweetness on the first sip. Keep it up!',
-    image: dicebearAvatar('Andreas Opitz'),
+    image: 'https://assets.untappd.com/profile/f6c1151761a4825f856ccfc40219beda-fb_100x100.jpg',
     location: undefined,
     untappdUrl: 'https://untappd.com/user/cabdriver86/checkin/1576310093',
   },
@@ -82,7 +82,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
     role: 'Untappd Review',
     textDE: 'Sehr süffig, wunderbar weich, getreidig und angenehm malzig.',
     textEN: 'Very smooth drinking, wonderfully soft, grainy and pleasantly malty.',
-    image: dicebearAvatar('Matze M'),
+    image: 'https://assets.untappd.com/profile/a0be8ebd5722ab47a6e3ecfc6b3ab255_100x100.jpg',
     location: undefined,
     untappdUrl: 'https://untappd.com/user/Matze_M/checkin/1553617052',
   },
@@ -92,7 +92,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
     role: 'Untappd Review',
     textDE: 'Solides Gebräu. Für Helles sogar charakteristische Substanz da, nicht negativ gemeint.',
     textEN: 'Solid brew. Even has notable character for a Helles — meant as a compliment.',
-    image: dicebearAvatar('Flo Luis'),
+    image: 'https://assets.untappd.com/profile/b2baa8628217fc3bbba9e6b2d86461c8_100x100.jpg',
     location: undefined,
     untappdUrl: 'https://untappd.com/user/Ludmanez/checkin/1535741920',
   },
@@ -102,7 +102,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
     role: 'Untappd Review',
     textDE: 'Würziges und leckeres Bierchen.',
     textEN: 'A spicy and tasty little beer.',
-    image: dicebearAvatar('Toni Debupi'),
+    image: 'https://assets.untappd.com/profile/a2a584ffa05182a29937ed8ddbaf64bd_100x100.jpg',
     location: undefined,
     untappdUrl: 'https://untappd.com/user/Tonidebupi/checkin/1524666780',
   },
@@ -112,7 +112,7 @@ const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
     role: 'Untappd Review',
     textDE: "Getreidig-malzig, 'Kellernote', Vanille(pudding) - alles dabei!",
     textEN: "Grainy-malty, a 'cellar note', vanilla (pudding) — it's all there!",
-    image: dicebearAvatar('Julian P'),
+    image: 'https://assets.untappd.com/profile/6987474d045139e83e4db41f7da2aa3d-fb_100x100.jpg',
     location: undefined,
     untappdUrl: 'https://untappd.com/user/loads0411/checkin/1576310165',
   },
@@ -221,14 +221,14 @@ export default function Testimonials({ lang = 'de' }: { lang?: string }) {
             href={UNTAPPD_STATS.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white border border-ink/15 text-ink font-bold text-sm px-5 py-2.5 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+            className="flex items-center gap-2.5 bg-accent text-on-accent font-bold text-sm px-6 py-3 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all whitespace-nowrap"
           >
             <img
               src="https://untappd.com/assets/design-system/ut-brand-dark.svg"
               alt="Untappd"
-              className="h-4 w-auto"
+              className="h-4 w-auto shrink-0"
             />
-            <span>{lang === 'en' ? 'View our Profile' : 'Unser Profil ansehen'}</span>
+            <span>{lang === 'en' ? 'Our Profile' : 'Unser Profil'}</span>
           </a>
         </motion.div>
       </div>
