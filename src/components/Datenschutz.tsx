@@ -115,7 +115,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
         id="datenschutz-interactive-overlay"
       >
         {/* Header Section */}
-        <div className="bg-canvas dark:bg-black border-b border-brand-dark-900 shadow-lg px-4 sm:px-6 lg:px-8 h-20 shrink-0 flex items-center justify-between">
+        <div className="bg-canvas dark:bg-ink border-b border-brand-dark-900 shadow-lg px-4 sm:px-6 lg:px-8 h-20 shrink-0 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="p-2 border border-accent/25 rounded bg-accent/10 text-accent font-mono text-xs font-bold animate-pulse">
               GDPR // DSGVO
@@ -132,7 +132,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
           
           <button 
             onClick={onClose}
-            className="rounded-lg p-2 bg-canvas dark:bg-ink border border-brand-dark-900 text-ink-secondary dark:text-canvas/70 hover:text-ink dark:hover:text-canvas hover:border-accent/30 transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:text-ink dark:focus:text-canvas"
+            className="rounded-lg p-2 bg-canvas dark:bg-ink border border-brand-dark-900 text-ink-secondary dark:text-canvas/70 hover:text-ink dark:hover:text-canvas hover:border-accent/30 transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-accent focus:text-ink dark:focus:text-canvas"
             aria-label="Schließen"
           >
             <X className="h-4 w-4" />
@@ -181,7 +181,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
                       id={`tab-${sec.id}`}
                       tabIndex={0}
                       onClick={() => handleScrollToSelection(sec.id)}
-                      className={`w-full text-left group flex items-center justify-between text-xs py-2 px-3 rounded-lg border font-mono font-bold transition-all focus:outline-none focus:ring-1 focus:ring-amber-500 truncate cursor-pointer ${
+                      className={`w-full text-left group flex items-center justify-between text-xs py-2 px-3 rounded-lg border font-mono font-bold transition-all focus:outline-none focus:ring-1 focus:ring-accent truncate cursor-pointer ${
                         isActive 
                           ? 'bg-accent/10 text-accent border-accent/20 shadow-md translate-x-1.5 font-black' 
                           : 'bg-canvas dark:bg-ink border border-brand-dark-900 shadow-lg text-ink-secondary dark:text-canvas/70 hover:text-ink dark:hover:text-canvas hover:bg-canvas dark:hover:bg-ink/80 hover:border-ink/20'
@@ -243,7 +243,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
                   
                   <div className="bg-canvas dark:bg-ink border border-brand-dark-900 shadow-lg p-4 rounded-xl space-y-1 text-sm font-mono text-ink dark:text-canvas">
                     <p className="text-xs text-ink-mute dark:text-canvas/60 uppercase tracking-widest font-bold">Anschrift</p>
-                    <p className="text-ink dark:text-canvas">Atzenhofer Str. 76, 90768 Fürth (Atzenhof)</p>
+                    <p className="text-ink dark:text-canvas">Nürnberger Str. 97, 90762 Fürth</p>
                   </div>
                   
                   <div className="bg-canvas dark:bg-ink border border-brand-dark-900 shadow-lg p-4 rounded-xl space-y-1 text-sm font-mono text-ink dark:text-canvas">
@@ -256,7 +256,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
                   <div className="bg-canvas dark:bg-ink border border-brand-dark-900 shadow-lg p-4 rounded-xl space-y-1 text-sm font-mono text-ink dark:text-canvas">
                     <p className="text-xs text-ink-mute dark:text-canvas/60 uppercase tracking-widest font-bold">E-Mail</p>
                     <p className="text-accent hover:underline">
-                      <a href="mailto:info@atzengold.net" aria-label="E-Mail senden">info@atzengold.net</a>
+                      <a href="mailto:gp@atzengold.net" aria-label="E-Mail senden">gp@atzengold.net</a>
                     </p>
                   </div>
                 </div>
@@ -610,7 +610,7 @@ export default function Datenschutz({ lang, isOpen, onClose }: DatenschutzProps)
                             alert("Opt-out abgeschlossen: Ein Opt-Out cookie blockiert nun jegliche zukünftige Erfassung durch Wix Analytics auf diesem Browser.");
                           }
                         }}
-                        className="h-4.5 w-4.5 rounded text-accent border-brand-dark-900 focus:ring-amber-500 focus:ring-opacity-25 bg-canvas shadow-lg" 
+                        className="h-4.5 w-4.5 rounded text-accent border-brand-dark-900 focus:ring-accent focus:ring-opacity-25 bg-canvas shadow-lg" 
                       />
                       <span>Opt-out Cookie setzen und Wix Analytics auf diesem Browser vollständig deaktivieren</span>
                     </label>

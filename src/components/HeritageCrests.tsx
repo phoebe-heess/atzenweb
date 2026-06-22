@@ -6,13 +6,23 @@ interface HeritageCrestsProps {
   lang: Language;
 }
 
+interface Crest {
+  id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  extra?: string;
+  svg: React.ReactNode;
+}
+
 export default function HeritageCrests({ lang }: HeritageCrestsProps) {
-  const crests = [
+  const crests: Crest[] = [
     {
       id: 'bayern',
       name: lang === 'en' ? 'Bavaria' : 'Bayern',
       subtitle: lang === 'en' ? 'Free State' : 'Freistaat',
       description: lang === 'en' ? 'The state of brewing excellence' : 'Staatliche Brautradition',
+      extra: lang === 'en' ? 'Bavarian Purity Law' : 'bayerisches Reinheitsgebot',
       svg: (
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Bayern_Wappen.svg" 
@@ -38,24 +48,11 @@ export default function HeritageCrests({ lang }: HeritageCrestsProps) {
       id: 'furth',
       name: 'Fürth',
       subtitle: lang === 'en' ? 'Brewery' : 'Brauort',
-      description: lang === 'en' ? 'Where Atzengold is born' : 'Fürth-Atzenhof Sudhaus',
+      description: lang === 'en' ? 'Where Atzengold is born' : 'Fürth-Atzenhof',
       svg: (
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/9/92/Wappen_F%C3%BCrth.svg" 
           alt="Fürth Crest" 
-          className="w-16 h-20 object-contain drop-shadow-md select-none" 
-        />
-      )
-    },
-    {
-      id: 'nurnberg',
-      name: lang === 'en' ? 'Nuremberg' : 'Nürnberg',
-      subtitle: lang === 'en' ? 'Registry' : 'Handel',
-      description: lang === 'en' ? 'Imperial city heritage' : 'Fränkisches Handelszentrum',
-      svg: (
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Wappen_von_N%C3%BCrnberg.svg" 
-          alt="Nuremberg Crest" 
           className="w-16 h-20 object-contain drop-shadow-md select-none" 
         />
       )
@@ -81,12 +78,12 @@ export default function HeritageCrests({ lang }: HeritageCrestsProps) {
         <span className="text-[10px] font-mono tracking-widest uppercase opacity-50 block mb-1">
           // {lang === 'en' ? 'GEOGRAPHIC HERITAGE' : 'GEOGRAFISCHES ERBGUT'}
         </span>
-        <h4 className="text-[56px] leading-[59px] font-handwritten font-bold normal-case text-[oklch(0.96_0.02_90)]">
+        <h4 className="text-[56px] leading-[59px] font-handwritten font-bold normal-case text-ink dark:text-canvas">
           {lang === 'en' ? 'Our Regional Roots' : 'Unsere regionalen Wurzeln'}
         </h4>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto px-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto px-4">
         {crests.map((crest, index) => (
           <motion.div
             key={crest.id}
@@ -95,9 +92,7 @@ export default function HeritageCrests({ lang }: HeritageCrestsProps) {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.4 }}
             whileHover={{ scale: 1.05 }}
-            className={`flex flex-col items-center text-center p-4 rounded-xl border border-transparent hover:border-ink/10 dark:hover:border-canvas/10 hover:bg-canvas-soft/50 dark:hover:bg-primary-deep/40 transition-all ${
-              crest.id === 'berlin' ? 'col-span-2 md:col-span-1' : ''
-            }`}
+            className="flex flex-col items-center text-center p-4 rounded-xl border border-transparent hover:border-ink/10 dark:hover:border-canvas/10 hover:bg-canvas-soft/50 dark:hover:bg-primary-deep/40 transition-all"
           >
             <div className="mb-4">
               {crest.svg}
@@ -107,6 +102,11 @@ export default function HeritageCrests({ lang }: HeritageCrestsProps) {
             <span className="text-[10px] text-ink-mute dark:text-canvas/50 leading-tight mt-1.5 max-w-[120px] font-sans">
               {crest.description}
             </span>
+            {crest.extra && (
+              <span className="text-[10px] text-ink-mute dark:text-canvas/50 leading-tight mt-1 max-w-[120px] font-sans italic">
+                {crest.extra}
+              </span>
+            )}
           </motion.div>
         ))}
       </div>

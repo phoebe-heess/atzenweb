@@ -8,6 +8,7 @@ export interface TestimonialType {
   name: string;
   role: string;
   location?: 'nurnberg' | 'furth' | 'berlin' | 'erlangen';
+  untappdUrl?: string;
 }
 
 const CREST_URLS = {
@@ -39,16 +40,19 @@ export const TestimonialsColumn = (props: {
         {[
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
-              {props.testimonials.map(({ text, image, name, role, location }, i) => {
+              {props.testimonials.map(({ text, image, name, role, location, untappdUrl }, i) => {
                 // Generate deterministic but varied rotations between -2deg and 2deg
                 const rotations = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-0'];
                 const rotationClass = rotations[i % rotations.length];
-                
+
                 const crestSrc = location ? CREST_URLS[location] : '/favicon.png';
-                
+                const CardTag = untappdUrl ? motion.a : motion.div;
+                const cardLinkProps = untappdUrl ? { href: untappdUrl, target: '_blank', rel: 'noreferrer' } : {};
+
                 return (
-                  <div 
-                    className={`p-8 rounded-xl bg-canvas dark:bg-brand-dark-900 text-ink dark:text-canvas shadow-lg hover:shadow-2xl transition-all duration-300 max-w-xs w-full relative group transform ${rotationClass} hover:rotate-0 hover:scale-105 hover:z-20`} 
+                  <CardTag
+                    {...cardLinkProps}
+                    className={`p-8 rounded-xl bg-canvas dark:bg-brand-dark-900 text-ink dark:text-canvas shadow-lg hover:shadow-2xl transition-all duration-300 max-w-xs w-full relative group transform ${rotationClass} hover:rotate-0 hover:scale-105 hover:z-20 ${untappdUrl ? 'cursor-pointer' : ''}`}
                     key={i}
                   >
                     {/* Paper texture overlay */}
@@ -91,7 +95,7 @@ export const TestimonialsColumn = (props: {
                         <div className="text-caption text-ink-mute dark:text-canvas/50 mt-0.5">{role}</div>
                       </div>
                     </div>
-                  </div>
+                  </CardTag>
                 );
               })}
             </React.Fragment>

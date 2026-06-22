@@ -16,8 +16,7 @@ import {
   Sparkles,
   Award,
   MapPin,
-  Play,
-  X
+  Play
 } from 'lucide-react';
 import { fetchStory } from '../lib/public-api';
 import { StoryNode } from '../types';
@@ -84,9 +83,6 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
   const t = translations[lang];
   const [storyNodes, setStoryNodes] = useState<StoryNode[]>(fallbackStory as StoryNode[]);
   const [activeNodeIndex, setActiveNodeIndex] = useState(0);
-  const [showCuckooVideo, setShowCuckooVideo] = useState(false);
-  const [cuckooSubtitle, setCuckooSubtitle] = useState('');
-  const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -149,10 +145,10 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
           </div>
 
           {/* Simulated Berlin Subway Sign Style */}
-          <div className="bg-[#0033A0] p-4 text-white transform rotate-3 flex-1 text-center shadow-md rounded-sm">
+          <div className="bg-ink p-4 text-canvas transform rotate-3 flex-1 text-center shadow-md rounded-sm">
             <p className="text-xs font-mono tracking-widest uppercase leading-none opacity-90">SUBWAY LINE</p>
             <p className="text-lg font-black tracking-tight mt-1 font-sans">U Kreuzberg</p>
-            <span className="inline-block mt-2 bg-ink text-[8px] font-mono text-white font-bold px-2 py-0.5 rounded-sm">
+            <span className="inline-block mt-2 bg-accent text-[8px] font-mono text-on-accent font-bold px-2 py-0.5 rounded-sm">
               ATZE DISTRICT
             </span>
           </div>
@@ -165,7 +161,7 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
               Node #{node.id} // {node.year}
             </span>
             
-            <h3 className="text-4xl font-handwritten font-bold text-ink dark:text-canvas tracking-tight normal-case">
+            <h3 className="text-4xl font-handwritten font-bold text-primary tracking-tight normal-case">
               {lang === 'en' ? node.titleEn : node.title}
             </h3>
             
@@ -263,6 +259,14 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                   <div className="flex items-start gap-8 relative pt-[30vh]">
                     {/* Sticky Date/Year Column (col-span-3 equivalent) */}
                     <div className="sticky top-[30vh] z-20 self-start flex items-center shrink-0 w-24">
+                      {node.gifUrl && (
+                        <img
+                          src={node.gifUrl}
+                          alt=""
+                          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                          className="w-9 h-9 rounded-md object-cover border-2 border-accent shadow-sm mr-2 shrink-0"
+                        />
+                      )}
                       {/* Timeline Dot (Sticks together with the year badge) */}
                       <div 
                         className={`absolute left-[-33px] top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
@@ -296,7 +300,7 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                           {lang === 'en' ? node.taglineEn : node.tagline}
                         </span>
                         <h4 className={`text-3xl font-handwritten font-bold transition-colors duration-300 normal-case ${
-                          isActive ? 'text-ink dark:text-canvas' : 'text-ink-mute dark:text-canvas/40'
+                          isActive ? 'text-primary' : 'text-ink-mute dark:text-canvas/40'
                         }`}>
                           {lang === 'en' ? node.titleEn : node.title}
                         </h4>
@@ -363,13 +367,23 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
 
                 {/* Narrative Text Block */}
                 <div className="space-y-2 max-w-md">
-                  <span className="year-sticker font-display font-extrabold italic text-xs px-2 py-1 transform -rotate-1">
-                    {node.year}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {node.gifUrl && (
+                      <img
+                        src={node.gifUrl}
+                        alt=""
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                        className="w-8 h-8 rounded-md object-cover border-2 border-accent shadow-sm shrink-0"
+                      />
+                    )}
+                    <span className="year-sticker font-display font-extrabold italic text-xs px-2 py-1 transform -rotate-1">
+                      {node.year}
+                    </span>
+                  </div>
                   <span className="ml-3 text-xs font-bold font-mono uppercase tracking-wider text-ink-mute dark:text-canvas/60">
                     {lang === 'en' ? node.taglineEn : node.tagline}
                   </span>
-                  <h4 className="text-3xl font-handwritten font-bold mt-2 text-ink dark:text-canvas normal-case">
+                  <h4 className="text-3xl font-handwritten font-bold mt-2 text-primary normal-case">
                     {lang === 'en' ? node.titleEn : node.title}
                   </h4>
                   <p className="text-sm leading-relaxed text-ink-secondary dark:text-canvas/80 mt-3 font-sans">
@@ -404,7 +418,7 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
                   {/* Card 1: ABV */}
                   <div className="bg-accent text-on-accent p-6 rounded-md shadow-sm border border-accent-hover hover:-translate-y-1 hover:shadow-md transition-all">
                       <span className="text-xs font-bold uppercase font-handwritten tracking-widest opacity-80">{t.brewAbv}</span>
@@ -413,20 +427,14 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
 
                   {/* Card 2: Unfiltered */}
                   <div className="bg-ink dark:bg-brand-dark-950 text-canvas p-6 rounded-md shadow-sm hover:-translate-y-1 hover:shadow-md transition-all" style={{animationDelay: '100ms'}}>
-                      <span className="text-xs font-bold uppercase font-handwritten tracking-widest text-zinc-400">{t.brewUnfiltered}</span>
-                      <p className="text-sm font-bold mt-3 leading-snug text-zinc-100">{t.brewUnfilteredDesc}</p>
-                  </div>
-
-                  {/* Card 3: Model */}
-                  <div className="bg-canvas dark:bg-brand-dark-900 border border-ink/10 dark:border-canvas/10 p-6 rounded-md sm:col-span-2 lg:col-span-1 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all" style={{animationDelay: '200ms'}}>
-                      <span className="text-xs font-bold text-ink-mute dark:text-canvas/50 uppercase font-handwritten tracking-widest">{t.brewModel}</span>
-                      <p className="text-sm font-bold text-ink dark:text-canvas mt-3 leading-snug">{t.brewModelDesc}</p>
+                      <span className="text-xs font-bold uppercase font-handwritten tracking-widest text-canvas/60">{t.brewUnfiltered}</span>
+                      <p className="text-sm font-bold mt-3 leading-snug text-canvas/90">{t.brewUnfilteredDesc}</p>
                   </div>
                 </div>
               </div>
 
               {/* Flavor Gauges Chart Breakdown */}
-              <div className="lg:col-span-6 bg-white dark:bg-brand-dark-900 border border-ink/10 dark:border-canvas/10 shadow-lg p-8 space-y-8 rounded-md relative z-40 overflow-hidden group">
+              <div className="lg:col-span-6 bg-canvas dark:bg-brand-dark-900 border border-ink/10 dark:border-canvas/10 shadow-lg p-8 space-y-8 rounded-md relative z-40 overflow-hidden group">
                 
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-110" />
                 
@@ -488,18 +496,28 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                 </h3>
                 
                 <p className="text-body-md text-ink-secondary dark:text-canvas/80 font-bold">
-                  {lang === 'en' 
-                    ? "At Atzengold, we prioritize liquid quality and regional collaboration over heavy industrial machinery. We do not own expensive steel factories. Instead, we act as 'Cuckoo Brewers' (Contract Brewing). We rent idle tank and brewing capacities during off-peak times from prestigious, generational family craft breweries located in Upper Franconia (Buttenheim and surrounding regions)."
-                    : "Bei Atzengold steht das Produkt und die regionale Verbundenheit im Mittelpunkt, nicht tonnenschwere Industrieanlagen. Wir besitzen keine millionenschweren Fabriken. Stattdessen leben wir das Prinzip des Kuckucksbrauens (Contract Brewing): Wir mieten freie, ungenutzte Sudkessel und Gärtanks während Nebenzeiten bei hoch angesehenen, Generationen alten Familienbrauereien in Oberfranken (z.B. im traditionsreichen Buttenheim)."}
+                  {lang === 'en'
+                    ? "At Atzengold, we prioritize liquid quality and regional collaboration over heavy industrial machinery. We do not own expensive steel factories — and that's a good thing. We rent idle tanks and fermenters from small family breweries in Upper Franconia and have them brew to our own recipe there."
+                    : "Bei Atzengold steht das Produkt und die regionale Verbundenheit im Mittelpunkt, nicht tonnenschwere Industrieanlagen. Wir besitzen keine millionenschweren Fabriken. und das ist auch gut so. Wir mieten freie, ungenutzte Sudkessel und Gärtanks bei kleinen Familienbrauereien in Oberfranken und lassen dort nach unserem eigenen Rezept brauen."}
                 </p>
 
-                <button
-                  onClick={() => { setShowCuckooVideo(true); setCuckooSubtitle("Folks! Got no stash for a brewery batch?!"); }}
+                <p className="text-sm text-ink-secondary dark:text-canvas/70 font-bold italic border-l-2 border-accent pl-4">
+                  {lang === 'en'
+                    ? "We don't have our own brewery, and that's a good thing. Why build more plants and take money from venture capitalists who already have plenty of cash, when you can team up with absolutely fantastic small Franconian breweries that make damn good beer and are, in some cases, not doing so well economically right now."
+                    : "Wir haben keine eigene Brauerei, und das ist auch gut so. Denn warum weitere Anlagen aufbauen und dafür Geld von Venture Capitalisten nehmen, die eh schon genügend Kohle haben, wenn man doch mit ganz fantastischen kleinen fränkischen Brauereien zusammenarbeiten kann, die saugutes Bier machen und denen es teilweise wirtschaftlich gerade gar nicht so gut geht."}
+                </p>
+
+                <a
+                  href="https://youtube.com/shorts/ASD8RRXFL4A"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-accent text-on-accent px-6 py-3 rounded-xl font-bold uppercase tracking-wider text-sm shadow-md hover:bg-accent-hover hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm transition-all border-2 border-ink cursor-pointer"
                 >
                   <Play className="h-5 w-5 fill-current" />
-                  {lang === 'en' ? 'Watch: How Cuckoo Brewing Works' : 'Video: So funktioniert Kuckucksbrauen'}
-                </button>
+                  {lang === 'en'
+                    ? "Here's a look inside our partner brewery St. Georgenbräu in Buttenheim"
+                    : 'Hier ein Einblick in unsere Partnerbrauerei St. Georgenbräu in Buttenheim'}
+                </a>
                 
                 <div className="space-y-4 pt-6 border-t border-ink/10 dark:border-canvas/10">
                   <h4 className="text-sm font-mono text-ink dark:text-canvas uppercase tracking-widest font-black">
@@ -607,49 +625,6 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
         </div>
 
       </div>
-
-      {showCuckooVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/80 dark:bg-black/85 backdrop-blur-md animate-fadeIn"
-          onClick={() => setShowCuckooVideo(false)}
-        >
-          <div
-            className="relative w-full max-w-3xl bg-canvas dark:bg-brand-dark-900 rounded-2xl overflow-hidden shadow-2xl border border-ink/10 dark:border-canvas/10"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowCuckooVideo(false)}
-              className="absolute top-3 right-3 z-10 p-2 rounded-full bg-ink/70 text-canvas hover:bg-ink transition-colors border-none cursor-pointer"
-              aria-label="Close video"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <video
-              ref={videoRef}
-              src="/videos/atzengold-cuckoo-brewing.mp4"
-              controls
-              autoPlay
-              muted={false}
-              playsInline
-              onEnded={() => setShowCuckooVideo(false)}
-              onTimeUpdate={() => {
-                const t = videoRef.current?.currentTime ?? 0;
-                if (t < 2) setCuckooSubtitle("Folks! Got no stash for a brewery batch?!");
-                else if (t < 4) setCuckooSubtitle("Don't blow your top!");
-                else if (t < 6) setCuckooSubtitle("");
-                else if (t < 8) setCuckooSubtitle("You rent the tanks and you fly the coop,");
-                else setCuckooSubtitle("with the finest in town!");
-              }}
-              className="w-full h-auto max-h-[80vh] object-contain bg-black"
-            >
-              <track kind="captions" srcLang={lang} label={lang === 'en' ? 'English' : 'Deutsch'} />
-            </video>
-            <div className="bg-ink/90 text-canvas text-center text-lg md:text-xl font-bold font-sans px-6 py-4 leading-snug tracking-wide min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center">
-              {cuckooSubtitle || <span className="opacity-0">_</span>}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

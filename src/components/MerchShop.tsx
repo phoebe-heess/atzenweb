@@ -24,7 +24,7 @@ import fallbackMerch from '../data/merch.json';
 import ProductDetail from './ProductDetail';
 
 const renderMerchIcon = (imageName: string, className?: string) => {
-  const cn = className || "h-16 w-16 text-amber-500 fill-amber-500/10 stroke-[1.5] transition-transform duration-300 group-hover:scale-110";
+  const cn = className || "h-16 w-16 text-accent fill-accent/10 stroke-[1.5] transition-transform duration-300 group-hover:scale-110";
   if (imageName === 'cap') {
     return <Tag className={cn} />;
   }
@@ -56,7 +56,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({
-    'm2': 'L'
+    'hoodie': 'L'
   });
 
   // Checkout modal states
@@ -206,7 +206,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
           {/* Quick Cart Trigger float badge button */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="cursor-pointer self-start md:self-auto rounded-full bg-ink dark:bg-accent hover:bg-zinc-800 dark:hover:bg-accent-hover text-canvas dark:text-on-accent px-6 py-4 text-sm flex items-center gap-2 transition-all hover:-translate-y-1 hover:shadow-lg shadow-md border-none"
+            className="cursor-pointer self-start md:self-auto rounded-full bg-ink dark:bg-accent hover:bg-ink/90 dark:hover:bg-accent-hover text-canvas dark:text-on-accent px-6 py-4 text-sm flex items-center gap-2 transition-all hover:-translate-y-1 hover:shadow-lg shadow-md border-none"
           >
             <ShoppingCart className="h-5 w-5" />
             {t.shopCartTitle} ({cart.reduce((a, c) => a + c.quantity, 0)})
@@ -245,7 +245,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
 
                 {/* Styled illustration frame placeholder */}
                 <div className="relative h-44 rounded-xl bg-ink/5 dark:bg-canvas/5 flex items-center justify-center select-none mb-4 overflow-hidden group-hover:bg-ink/10 dark:group-hover:bg-canvas/10 transition-colors">
-                  {thumb?.startsWith('http') ? (
+                  {(thumb?.startsWith('http') || thumb?.startsWith('/')) ? (
                     <img
                       src={thumb}
                       alt={item.name}
@@ -286,7 +286,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                     <div className="flex gap-2">
                       <button
                         onClick={() => addToCart(item, currentSize)}
-                        className="flex-1 rounded-xl cursor-pointer bg-ink dark:bg-accent hover:bg-zinc-800 dark:hover:bg-accent-hover text-canvas dark:text-on-accent font-display font-bold uppercase py-3 px-4 transition-all hover:shadow-lg flex items-center justify-center gap-2 border-none text-sm"
+                        className="flex-1 rounded-xl cursor-pointer bg-ink dark:bg-accent hover:bg-ink/90 dark:hover:bg-accent-hover text-canvas dark:text-on-accent font-display font-bold uppercase py-3 px-4 transition-all hover:shadow-lg flex items-center justify-center gap-2 border-none text-sm"
                       >
                         <ShoppingCart className="h-4 w-4" />
                         {t.shopAddToCart}
@@ -310,7 +310,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
 
         {/* CART DRAWER BACKDROP MASK (Slide over mockup layout) */}
         {isCartOpen && (
-          <div className="fixed inset-0 z-40 bg-ink/40 dark:bg-black/60 backdrop-blur-md transition-all duration-300 flex justify-end">
+          <div className="fixed inset-0 z-40 bg-ink/40 dark:bg-ink/60 backdrop-blur-md transition-all duration-300 flex justify-end">
             
             {/* Click backdrop to exit */}
             <div className="absolute inset-0 cursor-default" onClick={() => setIsCartOpen(false)} />
@@ -351,7 +351,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                       >
                         {/* Img circle box */}
                         <div className="h-16 w-16 rounded-lg bg-ink/5 dark:bg-canvas/5 flex items-center justify-center shrink-0 overflow-hidden">
-                          {cartItem.item.images?.[0]?.startsWith('http') ? (
+                          {(cartItem.item.images?.[0]?.startsWith('http') || cartItem.item.images?.[0]?.startsWith('/')) ? (
                             <img src={cartItem.item.images[0]} alt="" className="w-full h-full object-cover" />
                           ) : (
                             renderMerchIcon(cartItem.item.image, "h-8 w-8 text-ink dark:text-canvas fill-ink/10 dark:fill-canvas/10 stroke-[1.5]")
@@ -393,7 +393,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                           </span>
                           <button
                             onClick={() => removeFromCart(cartItem.item.id, cartItem.selectedSize)}
-                            className="text-ink/40 dark:text-canvas/40 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 border-none bg-transparent cursor-pointer"
+                            className="text-ink/40 dark:text-canvas/40 hover:text-ink dark:hover:text-canvas transition-colors p-1 border-none bg-transparent cursor-pointer"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
@@ -418,7 +418,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                         Versand:
                       </span>
                       <span className="text-body-tabular" style={{ fontFeatureSettings: '"tnum"' }}>
-                        {shippingCost === 0 ? <span className="text-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 px-2 py-0.5 rounded-full text-xs border border-emerald-200 dark:border-emerald-800">Gratis (Ab 50€ !)</span> : `€${shippingCost.toFixed(2)}`}
+                        {shippingCost === 0 ? <span className="text-primary bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded-full text-xs border border-primary/20 dark:border-primary/30">Gratis (Ab 50€ !)</span> : `€${shippingCost.toFixed(2)}`}
                       </span>
                     </div>
                     <div className="border-t border-ink/10 dark:border-canvas/10 my-3 pt-3 flex justify-between text-lg font-black text-ink dark:text-canvas font-display">
@@ -447,7 +447,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
 
         {/* CHECKOUT MODAL — Stripe Checkout */}
         {isCheckoutOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/60 dark:bg-black/70 backdrop-blur-md animate-fadeIn">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/60 dark:bg-ink/70 backdrop-blur-md animate-fadeIn">
             
             <div className="relative w-full max-w-md bg-canvas dark:bg-brand-dark-900 rounded-3xl p-6 md:p-8 shadow-2xl border dark:border-canvas/10">
               
@@ -542,7 +542,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                 </div>
 
                 {checkoutError && (
-                  <div className="rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 p-3 text-xs font-bold text-red-700 dark:text-red-300">
+                  <div className="rounded-xl bg-ink/5 dark:bg-ink/10 border border-ink/20 dark:border-canvas/20 p-3 text-xs font-bold text-ink dark:text-canvas">
                     {checkoutError}
                   </div>
                 )}
@@ -555,7 +555,7 @@ export default function MerchShop({ lang, onAddCartFeedback }: MerchShopProps) {
                 <button
                   type="submit"
                   disabled={checkoutLoading}
-                  className="w-full cursor-pointer rounded-xl bg-ink dark:bg-accent text-canvas dark:text-on-accent py-4 text-lg font-display font-black uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-accent-hover transition-all text-center shadow-md hover:shadow-xl hover:-translate-y-0.5 mt-4 border-none disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full cursor-pointer rounded-xl bg-ink dark:bg-accent text-canvas dark:text-on-accent py-4 text-lg font-display font-black uppercase tracking-wider hover:bg-ink/90 dark:hover:bg-accent-hover transition-all text-center shadow-md hover:shadow-xl hover:-translate-y-0.5 mt-4 border-none disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {checkoutLoading ? (
                     <span className="flex items-center justify-center gap-2">

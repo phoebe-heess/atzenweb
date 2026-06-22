@@ -119,7 +119,7 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
         <div className="bg-canvas dark:bg-brand-dark-900 border-b border-ink/10 dark:border-canvas/10 shadow-lg px-4 sm:px-6 lg:px-8 h-20 shrink-0 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="p-2 border border-primary-deep/25 rounded bg-primary-deep/10 text-primary-deep dark:text-accent font-mono text-xs font-bold">
-              TMG // § 5
+              DDG // § 5
             </span>
             <div>
               <h1 id="impressum-title" className="text-lg sm:text-xl font-black tracking-tight text-ink dark:text-canvas font-sans">
@@ -213,7 +213,7 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
               {/* Introduction Deck */}
               <div className="p-6 rounded-2xl bg-ink/5 dark:bg-canvas/5 border border-ink/10 dark:border-canvas/10 mb-6 space-y-3.5">
                 <span className="text-[10px] font-mono text-primary-deep dark:text-accent uppercase tracking-widest font-black block bg-primary-deep/5 dark:bg-accent/10 py-1 px-2.5 rounded border border-primary-deep/10 dark:border-accent/20 w-fit">
-                  {isEn ? 'German Telemedia Act § 5 Compliance' : 'Offizielle Anbieterkennzeichnung nach § 5 TMG'}
+                  {isEn ? 'German Digital Services Act § 5 Compliance' : 'Offizielle Anbieterkennzeichnung nach § 5 DDG'}
                 </span>
                 <p className="text-xs text-ink-secondary dark:text-canvas/80 leading-relaxed">
                   {isEn ? (
@@ -258,7 +258,7 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                       className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-ink-mute dark:text-canvas/50 hover:text-accent cursor-pointer"
                       title={isEn ? 'Copy' : 'Kopieren'}
                     >
-                      {copiedText === 'entity' ? <Check className="h-4.5 w-4.5 text-emerald-500" /> : <Copy className="h-4.5 w-4.5" />}
+                      {copiedText === 'entity' ? <Check className="h-4.5 w-4.5 text-primary" /> : <Copy className="h-4.5 w-4.5" />}
                     </button>
                   </div>
                   
@@ -272,7 +272,7 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                       className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-ink-mute dark:text-canvas/50 hover:text-accent cursor-pointer"
                       title={isEn ? 'Copy' : 'Kopieren'}
                     >
-                      {copiedText === 'director' ? <Check className="h-4.5 w-4.5 text-emerald-500" /> : <Copy className="h-4.5 w-4.5" />}
+                      {copiedText === 'director' ? <Check className="h-4.5 w-4.5 text-primary" /> : <Copy className="h-4.5 w-4.5" />}
                     </button>
                   </div>
 
@@ -280,16 +280,16 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                     <p className="text-xs text-ink-secondary dark:text-canvas/70 uppercase tracking-widest font-bold">
                       {isEn ? 'Registered Office Address' : 'Ladungsfähige Anschrift'}
                     </p>
-                    <p className="text-ink dark:text-canvas select-all">Atzenhofer Str. 76, 90768 Fürth (Atzenhof), Germany</p>
+                    <p className="text-ink dark:text-canvas select-all">Nürnberger Str. 97, 90762 Fürth, Germany</p>
                     <p className="text-xs text-ink-mute dark:text-canvas/60 mt-1">
-                      {isEn ? 'Bavaria (Atzenhof region)' : 'Mittelfranken (Regierungsbezirk Atzenhof)'}
+                      {isEn ? 'Bavaria, Germany' : 'Mittelfranken, Bayern'}
                     </p>
-                    <button 
-                      onClick={() => copyToClipboard('Atzenhofer Str. 76, 90768 Fürth (Atzenhof)', 'address')}
+                    <button
+                      onClick={() => copyToClipboard('Nürnberger Str. 97, 90762 Fürth', 'address')}
                       className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-ink-mute dark:text-canvas/50 hover:text-accent cursor-pointer"
                       title={isEn ? 'Copy' : 'Kopieren'}
                     >
-                      {copiedText === 'address' ? <Check className="h-4.5 w-4.5 text-emerald-500" /> : <Copy className="h-4.5 w-4.5" />}
+                      {copiedText === 'address' ? <Check className="h-4.5 w-4.5 text-primary" /> : <Copy className="h-4.5 w-4.5" />}
                     </button>
                   </div>
                 </div>
@@ -327,14 +327,14 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                     </div>
                   </a>
 
-                  <a 
-                    href="mailto:info@atzengold.net" 
+                  <a
+                    href="mailto:gp@atzengold.net"
                     className="flex items-center gap-4 bg-canvas dark:bg-brand-dark-900 border border-ink/10 dark:border-canvas/10 shadow-sm p-4 rounded-xl hover:border-accent/30 transition-all group cursor-pointer focus:outline-none focus:ring-1 focus:ring-accent"
                   >
                     <Mail className="h-5 w-5 text-ink-mute dark:text-canvas/60 group-hover:text-accent shrink-0" />
                     <div className="font-mono text-sm leading-tight truncate w-full">
                       <p className="text-[10px] text-ink-secondary dark:text-canvas/70 uppercase tracking-widest font-bold">Elektronische Post (E-Mail)</p>
-                      <p className="text-ink dark:text-canvas font-bold select-all mt-1 truncate">info@atzengold.net</p>
+                      <p className="text-ink dark:text-canvas font-bold select-all mt-1 truncate">gp@atzengold.net</p>
                     </div>
                   </a>
                 </div>
@@ -372,7 +372,7 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                     className="p-2 border border-ink/10 dark:border-canvas/10 rounded bg-ink/5 dark:bg-canvas/5 hover:border-accent/20 text-ink-mute dark:text-canvas/60 hover:text-ink dark:hover:text-canvas cursor-pointer transition-all"
                     title={isEn ? 'Copy' : 'Kopieren'}
                   >
-                    {copiedText === 'ustid' ? <Check className="h-4.5 w-4.5 text-emerald-500" /> : <Copy className="h-4.5 w-4.5" />}
+                    {copiedText === 'ustid' ? <Check className="h-4.5 w-4.5 text-primary" /> : <Copy className="h-4.5 w-4.5" />}
                   </button>
                 </div>
               </section>
@@ -402,14 +402,14 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                     {isEn ? 'Editor-in-Chief / Content Officer' : 'Verantwortliche Person'}
                   </p>
                   <p className="text-ink dark:text-canvas font-bold select-all">Gabriel Platt</p>
-                  <p className="text-ink-secondary dark:text-canvas/80 select-all">Atzenhofer Str. 76, 90768 Fürth (Atzenhof)</p>
-                  
-                  <button 
-                    onClick={() => copyToClipboard('Gabriel Platt, Atzenhofer Str. 76, 90768 Fürth (Atzenhof)', 'responsible')}
+                  <p className="text-ink-secondary dark:text-canvas/80 select-all">Nürnberger Str. 97, 90762 Fürth</p>
+
+                  <button
+                    onClick={() => copyToClipboard('Gabriel Platt, Nürnberger Str. 97, 90762 Fürth', 'responsible')}
                     className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-ink-mute dark:text-canvas/50 hover:text-accent cursor-pointer"
                     title={isEn ? 'Copy' : 'Kopieren'}
                   >
-                    {copiedText === 'responsible' ? <Check className="h-4.5 w-4.5 text-emerald-500" /> : <Copy className="h-4.5 w-4.5" />}
+                    {copiedText === 'responsible' ? <Check className="h-4.5 w-4.5 text-primary" /> : <Copy className="h-4.5 w-4.5" />}
                   </button>
                 </div>
               </section>
@@ -512,9 +512,9 @@ export default function Impressum({ lang, isOpen, onClose }: ImpressumProps) {
                     </strong>
                     <p>
                       {isEn ? (
-                        "As a Service Provider, we are legally responsible for our own custom information published on these pages under § 7 Abs. 1 TMG. However, pursuant to §§ 8 to 10 TMG, we are not legally obliged to actively monitor third-party transmitted data or investigate potential background context pointing to unlawful incidents. Our legal liabilities to remove or restrict specific information upon formal knowledge remain entirely unaffected. Liability begins ONLY once we obtain concrete knowledge of a verified breach. Upon verified evidence, such breach items shall be removed instantly."
+                        "As a Service Provider, we are legally responsible for our own custom information published on these pages under § 7 Abs. 1 DDG. However, pursuant to §§ 8 to 10 DDG, we are not legally obliged to actively monitor third-party transmitted data or investigate potential background context pointing to unlawful incidents. Our legal liabilities to remove or restrict specific information upon formal knowledge remain entirely unaffected. Liability begins ONLY once we obtain concrete knowledge of a verified breach. Upon verified evidence, such breach items shall be removed instantly."
                       ) : (
-                        "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen."
+                        "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen."
                       )}
                     </p>
                   </div>

@@ -2,24 +2,13 @@
   {
     "id": 1,
     "year": "2020",
-    "title": "Der Umzug aus Liebe",
-    "titleEn": "Relocating for Love",
-    "text": "Gabriel, ein waschechter Berliner Szene-Gastronom, bricht seine Zelte in der Hauptstadt ab und zieht für die Liebe ins fränkische Fürth. Er vermisst die Berliner Späti-Kultur, verliebt sich aber sofort in das legendär gute fränkische Bier.",
-    "textEn": "Gabriel, a true Berlin nightlife creative, leaves the capital behind and relocates to Fürth, Bavaria, following his heart. He misses the late-night Berlin Späti kiosks, but instantly falls for the legendary local Franconian brewing heritage.",
-    "tagline": "BERLIN GOES FRANKEN",
-    "taglineEn": "BERLIN TO BAVARIA",
+    "title": "Vom VICE-Büro nach Franken",
+    "titleEn": "From VICE Office to Franconia",
+    "text": "Nachdem er jahrelang für das VICE Magazin in Berlin arbeitete, verschlug es Gabriel, den Gründer von Atzengold 2012 in die Metropolregion. Dort traf er Harry, der die HeyHey Bar in der Klaragasse betrieb und der aus Atzenhof stammt. Atzen sind in der Hauptstadt die Freunde, mit denen Du das Brot brichst. Oder halt flüssiges Brot.",
+    "textEn": "After years working for VICE Magazine in Berlin, Gabriel, the founder of Atzengold, found his way to the metro region in 2012. There he met Harry, who ran the HeyHey Bar on Klaragasse and hails from Atzenhof. In the capital, 'Atzen' are the friends you break bread with. Or, well, liquid bread.",
+    "tagline": "VICE BERLIN TRIFFT ATZENHOF",
+    "taglineEn": "VICE BERLIN MEETS ATZENHOF",
     "image": "Map"
-  },
-  {
-    "id": 2,
-    "year": "2020",
-    "title": "Das Atzenhof-Aha!",
-    "titleEn": "The Atzenhof Revelation",
-    "text": "Bei Erkundungstouren stolpert Gabriel über das Fürther Ortsschild 'Atzenhof'. Gänsehaut-Moment: Im Berliner Dialekt bedeutet 'Atze' bester Kumpel oder Bruder. Ursprünglich mhd. 'atzen' (zusammen essen/brotbrechen). Die perfekte Brücke war geboren!",
-    "textEn": "While exploring his new surroundings, Gabriel spots the Fürth district road sign: 'Atzenhof'. Goosebumps kick in: 'Atze' is famous Berlin slang for a close friend or brother! The ultimate connection between his two home turf worlds was born.",
-    "tagline": "STADTTEIL TRIFFT SLAENG",
-    "taglineEn": "DESTINY COINCIDENCE",
-    "image": "Compass"
   },
   {
     "id": 3,
@@ -42,6 +31,18 @@
     "tagline": "TRANSPARENT & NACHHALTIG",
     "taglineEn": "CONSCIOUS COOPERATION",
     "image": "Infinity"
+  },
+  {
+    "id": 6,
+    "year": "2023",
+    "title": "Die Geburtsstunde",
+    "titleEn": "The Birth of an Idea",
+    "text": "Die Idee ward geboren und so entstand ein süffiges unfiltriertes Helles um dass sich immer mehr Atzen (das beinhaltet natürlich auch ausdrücklich Atz:innen, auch wenn das Wort geschlechtslos ist) scharen.",
+    "textEn": "The idea was born, giving rise to a süffig, unfiltered Helles around which more and more Atzen gather (this of course explicitly includes Atz:innen too, even though the word itself is gender-neutral).",
+    "tagline": "VON DER IDEE ZUM BIER",
+    "taglineEn": "FROM IDEA TO BEER",
+    "image": "Users",
+    "gifUrl": "/images/instagram-feed.gif"
   },
   {
     "id": 5,

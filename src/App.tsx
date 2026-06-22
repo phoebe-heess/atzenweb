@@ -12,8 +12,6 @@ import {
   ShieldAlert,
   Flame,
   ArrowRight,
-  Sun,
-  Moon,
   Mail
 } from 'lucide-react';
 import AgeGate from './components/AgeGate';
@@ -21,7 +19,8 @@ import CookieBanner from './components/CookieBanner';
 import ThreeDMap from './components/ThreeDMap';
 import StoryAndBrew from './components/StoryAndBrew';
 import MerchShop from './components/MerchShop';
-import B2BPortal from './components/B2BPortal';
+// B2B-Portal vorerst deaktiviert (Gabriel: "vielleicht benötigen wir das später") — nur auskommentiert, nicht gelöscht.
+// import B2BPortal from './components/B2BPortal';
 import BrandHub from './components/BrandHub';
 import Datenschutz from './components/Datenschutz';
 import Impressum from './components/Impressum';
@@ -31,7 +30,6 @@ import AGB from './components/AGB';
 import GoldBarsSVG from './components/GoldBarsSVG';
 import NotificationToast from './components/NotificationToast';
 import InstagramFeed from './components/InstagramFeed';
-import NewsletterSignup from './components/NewsletterSignup';
 import Testimonials from './components/Testimonials';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminLayout from './components/admin/AdminLayout';
@@ -85,43 +83,6 @@ function playNotificationChime() {
   }
 }
 
-const GermanFlagSVG = () => (
-  <svg viewBox="0 0 100 100" className="w-full h-full select-none" xmlns="http://www.w3.org/2000/svg">
-    <clipPath id="circleViewDE">
-      <circle cx="50" cy="50" r="50" />
-    </clipPath>
-    <g clipPath="url(#circleViewDE)">
-      <rect x="0" y="0" width="100" height="33.3" fill="#2C2D2F" />
-      <rect x="0" y="33.3" width="100" height="33.3" fill="#B83A3D" />
-      <rect x="0" y="66.6" width="100" height="33.4" fill="#D9AC2B" />
-    </g>
-  </svg>
-);
-
-const UKFlagSVG = () => (
-  <svg viewBox="0 0 100 100" className="w-full h-full select-none" xmlns="http://www.w3.org/2000/svg">
-    <clipPath id="circleViewUK">
-      <circle cx="50" cy="50" r="50" />
-    </clipPath>
-    <g clipPath="url(#circleViewUK)">
-      {/* Muted Navy Blue base */}
-      <rect x="0" y="0" width="100" height="100" fill="#1C355E" />
-      {/* White diagonal lines */}
-      <line x1="0" y1="0" x2="100" y2="100" stroke="#FFFFFF" strokeWidth="12" />
-      <line x1="100" y1="0" x2="0" y2="100" stroke="#FFFFFF" strokeWidth="12" />
-      {/* Muted Red diagonal lines */}
-      <line x1="0" y1="0" x2="100" y2="100" stroke="#B83A3D" strokeWidth="6" />
-      <line x1="100" y1="0" x2="0" y2="100" stroke="#B83A3D" strokeWidth="6" />
-      {/* White vertical & horizontal cross */}
-      <line x1="50" y1="0" x2="50" y2="100" stroke="#FFFFFF" strokeWidth="20" />
-      <line x1="0" y1="50" x2="100" y2="50" stroke="#FFFFFF" strokeWidth="20" />
-      {/* Muted Red vertical & horizontal cross */}
-      <line x1="50" y1="0" x2="50" y2="100" stroke="#B83A3D" strokeWidth="12" />
-      <line x1="0" y1="50" x2="100" y2="50" stroke="#B83A3D" strokeWidth="12" />
-    </g>
-  </svg>
-);
-
 export default function App() {
   const [lang, setLang] = useState<Language>('de');
   const [isVerified, setIsVerified] = useState(false);
@@ -135,9 +96,8 @@ export default function App() {
   const [showAGB, setShowAGB] = useState(false);
   const [checkoutOrderId, setCheckoutOrderId] = useState<string | null>(null);
   const [showCheckoutCancel, setShowCheckoutCancel] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    return (localStorage.getItem('atzengold_theme') as 'dark' | 'light') || 'dark';
-  });
+  // Dark mode entfernt — Seite läuft nur noch im hellen/beigen Theme
+  const theme: 'dark' | 'light' = 'light';
   const [showHeader, setShowHeader] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -193,28 +153,24 @@ export default function App() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    localStorage.setItem('atzengold_theme', theme);
+    // Seite läuft nur noch im hellen/beigen Theme — Dark Mode entfernt
     const root = window.document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    } else {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    }
-  }, [theme]);
+    root.classList.add('light');
+    root.classList.remove('dark');
+  }, []);
 
   // Admin mode & checkout routes: check URL hash on mount and restore stored API key
   useEffect(() => {
     const hash = window.location.hash;
 
-    if (hash === '#admin') {
-      const stored = localStorage.getItem('ag_admin_key');
-      if (stored) {
-        setAdminApiKey(stored);
-        setIsAdmin(true);
-      }
-    }
+    // Admin-CMS vorerst deaktiviert (Gabriel: "Nur auskommentieren") — Einstiegspunkt über #admin-Hash auskommentiert, Code bleibt erhalten.
+    // if (hash === '#admin') {
+    //   const stored = localStorage.getItem('ag_admin_key');
+    //   if (stored) {
+    //     setAdminApiKey(stored);
+    //     setIsAdmin(true);
+    //   }
+    // }
 
     if (hash.startsWith('#checkout/success')) {
       const params = new URLSearchParams(hash.split('?')[1] || '');
@@ -229,13 +185,14 @@ export default function App() {
     const onHashChange = () => {
       const h = window.location.hash;
 
-      if (h === '#admin') {
-        const stored = localStorage.getItem('ag_admin_key');
-        if (stored) {
-          setAdminApiKey(stored);
-          setIsAdmin(true);
-        }
-      }
+      // Admin-CMS vorerst deaktiviert — siehe oben.
+      // if (h === '#admin') {
+      //   const stored = localStorage.getItem('ag_admin_key');
+      //   if (stored) {
+      //     setAdminApiKey(stored);
+      //     setIsAdmin(true);
+      //   }
+      // }
 
       if (h.startsWith('#checkout/success')) {
         const params = new URLSearchParams(h.split('?')[1] || '');
@@ -251,17 +208,17 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
-  // Alt+A keyboard shortcut to toggle admin mode
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.altKey && e.key === 'a') {
-        e.preventDefault();
-        setIsAdmin(prev => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Alt+A keyboard shortcut to toggle admin mode — auskommentiert (Admin-CMS vorerst deaktiviert)
+  // useEffect(() => {
+  //   const handleKeyDown = (e: KeyboardEvent) => {
+  //     if (e.altKey && e.key === 'a') {
+  //       e.preventDefault();
+  //       setIsAdmin(prev => !prev);
+  //     }
+  //   };
+  //   window.addEventListener('keydown', handleKeyDown);
+  //   return () => window.removeEventListener('keydown', handleKeyDown);
+  // }, []);
 
   // Dynamic Crisp Chat widget injection
   useEffect(() => {
@@ -308,11 +265,7 @@ export default function App() {
   };
 
   const handleLanguageSwitch = () => {
-    setLang(prev => {
-      if (prev === 'de') return 'de-BY';
-      if (prev === 'de-BY') return 'en';
-      return 'de';
-    });
+    setLang(prev => (prev === 'de' ? 'en' : 'de'));
   };
 
   const handleAdminLogin = (key: string) => {
@@ -449,31 +402,16 @@ export default function App() {
 
           {/* Right Header actions (Language switch + Quick cta + Hamburger menu) */}
           <div className="hidden md:flex items-center gap-4 ml-auto">
-            {/* Theme Switcher Toggle */}
-            <button
-              id="theme-toggle-desktop"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="text-zinc-900 dark:text-white hover:text-magenta dark:hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
-              style={{ background: 'none', border: 'none', padding: 0 }}
-              title={theme === 'dark' ? 'Wechseln zu Kontrast-Lichtmodus' : 'Wechseln zu Dunkelmodus'}
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-6 w-6" />
-              ) : (
-                <Moon className="h-6 w-6" />
-              )}
-            </button>
-
             <button
               id="lang-switcher"
               onClick={() => setLang(prev => prev === 'en' ? 'de' : 'en')}
-              className="w-10 h-10 rounded-full overflow-hidden border border-ink/20 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent p-0 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
+              className="w-10 h-10 rounded-full border border-ink/20 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent p-0 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-ink"
               aria-label={lang === 'en' ? "Auf Deutsch umstellen" : "Switch to English"}
               title={lang === 'en' ? "Auf Deutsch umstellen" : "Switch to English"}
             >
-              <div className="w-full h-full scale-[1.05]">
-                {lang === 'en' ? <UKFlagSVG /> : <GermanFlagSVG />}
-              </div>
+              <span className="text-xs font-bold font-mono tracking-wide">
+                {lang === 'en' ? 'EN' : 'DE'}
+              </span>
             </button>
             
             <a
@@ -489,7 +427,7 @@ export default function App() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="text-zinc-900 dark:text-white hover:text-magenta dark:hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
+              className="text-ink dark:text-canvas hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
               style={{ background: 'none', border: 'none', padding: 0 }}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -499,35 +437,21 @@ export default function App() {
           {/* Mobile responsive hamburger menu trigger */}
           <div className="flex items-center gap-4 md:hidden ml-auto">
             <button
-              id="theme-toggle-mobile"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="text-zinc-900 dark:text-white hover:text-magenta dark:hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
-              style={{ background: 'none', border: 'none', padding: 0 }}
-              title="Wechseln zu Kontrast-Lichtmodus"
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-6 w-6" />
-              ) : (
-                <Moon className="h-6 w-6" />
-              )}
-            </button>
-
-            <button
               onClick={() => setLang(prev => prev === 'en' ? 'de' : 'en')}
-              className="w-9 h-9 rounded-full overflow-hidden border border-zinc-700 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent p-0 flex items-center justify-center focus:outline-none"
+              className="w-9 h-9 rounded-full border border-ink/20 dark:border-canvas/20 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer bg-transparent p-0 flex items-center justify-center focus:outline-none text-ink dark:text-canvas"
               aria-label={lang === 'en' ? "Auf Deutsch umstellen" : "Switch to English"}
               title={lang === 'en' ? "Auf Deutsch umstellen" : "Switch to English"}
             >
-              <div className="w-full h-full scale-[1.05]">
-                {lang === 'en' ? <UKFlagSVG /> : <GermanFlagSVG />}
-              </div>
+              <span className="text-xs font-bold font-mono tracking-wide">
+                {lang === 'en' ? 'EN' : 'DE'}
+              </span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="text-zinc-900 dark:text-white hover:text-magenta dark:hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
+              className="text-ink dark:text-canvas hover:text-accent transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none bg-transparent border-none p-0 flex items-center justify-center"
               style={{ background: 'none', border: 'none', padding: 0 }}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -549,7 +473,7 @@ export default function App() {
             className={`fixed inset-0 z-50 overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row ${
               theme === 'light'
                 ? 'bg-canvas text-ink'
-                : 'bg-zinc-950 text-amber-50'
+                : 'bg-primary-deep text-canvas'
             }`}
           >
             {/* Left Panel: Graphic Art & Narrative Canvas (visible on lg screens, stacks on mobile) */}
@@ -563,13 +487,13 @@ export default function App() {
                   <span className="text-4xl font-handwritten text-primary font-bold tracking-normal leading-none">
                     Atzengold
                   </span>
-                  <span className="text-[10px] font-mono border border-amber-500/20 px-2 py-0.5 rounded text-amber-500 bg-amber-500/5 select-none uppercase font-bold tracking-wider">
+                  <span className="text-[10px] font-mono border border-accent/20 px-2 py-0.5 rounded text-accent bg-accent/5 select-none uppercase font-bold tracking-wider">
                     HELL
                   </span>
                 </div>
                 <div className="flex flex-col items-start gap-1">
                   <div className="inline-block bg-ink text-canvas font-display text-sm px-3 py-1 skew-x-3 leading-none">
-                    Naturtrübe Kultur //
+                    Lecker Bierchen //
                   </div>
                   <div className="font-handwritten text-2xl sm:text-3xl normal-case tracking-normal text-accent font-bold mt-1">
                     Franken x Berlin
@@ -585,8 +509,6 @@ export default function App() {
                 <p className="text-xs sm:text-sm font-medium leading-relaxed opacity-75 mb-6">
                   {lang === 'en'
                     ? 'Brewed with absolute respect. Shared over concrete. Atzengold is the unfiltered Franconian Kellerbier for best friends catching the first warm sunrays sitting on the pavement.'
-                    : lang === 'de-BY'
-                    ? 'Braut mit reinem Respekt. Getrunken aufm Pflaster. Atzengold is des unfiltrierte fränkische Kellerbier für echte Spezln, de wo den ersten warmen Sonnenstrahl auf der Bordsteinkanten genießen.'
                     : 'Braut mit reinem Respekt. Getrunken auf dem Pflaster. Atzengold ist das unfiltrierte fränkische Kellerbier für beste Freunde, die den ersten warmen Sonnenstrahl auf der Bordsteinkante genießen.'}
                 </p>
                 
@@ -631,7 +553,7 @@ export default function App() {
                   />
                   <button 
                     type="submit"
-                    className="bg-brand-dark-900 text-zinc-50 hover:bg-accent hover:text-on-accent rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
+                    className="bg-brand-dark-900 text-canvas hover:bg-accent hover:text-on-accent rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
                   >
                     {lang === 'en' ? 'JOIN' : 'ABO'}
                   </button>
@@ -647,7 +569,7 @@ export default function App() {
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Close navigation menu"
-                  className="p-3 rounded-full bg-ink text-canvas hover:scale-105 hover:bg-magenta transition-all duration-200 cursor-pointer shadow-lg flex items-center justify-center focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
+                  className="p-3 rounded-full bg-ink text-canvas hover:scale-105 hover:bg-accent hover:text-on-accent transition-all duration-200 cursor-pointer shadow-lg flex items-center justify-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -672,7 +594,8 @@ export default function App() {
                     { href: "#utz-beer-profile", label: t.navBeer, desc: lang === 'en' ? 'Franconian Kellerbier' : 'Fränkisches Kellerbier' },
                     { href: "#map-finder", label: t.navMap, desc: lang === 'en' ? 'Find Us Near You' : 'Späti & Kneipenfinder' },
                     { href: "#merch-shop", label: t.navShop, desc: lang === 'en' ? 'Corner Goods' : 'Atzenmerch Shop' },
-                    { href: "#b2b-gastronomy", label: t.navB2b, desc: lang === 'en' ? 'Gastro & Retail' : 'Gastro & Handel Portal' },
+                    // B2B-Portal-Navlink auskommentiert (vorerst deaktiviert, nicht gelöscht)
+                    // { href: "#b2b-gastronomy", label: t.navB2b, desc: lang === 'en' ? 'Gastro & Retail' : 'Gastro & Handel Portal' },
                     { href: "#instagram-feed", label: "Instagram", desc: lang === 'en' ? 'Corner Life' : 'Pavement Kultur' }
                   ].map((link, idx) => (
                     <motion.div
@@ -685,12 +608,12 @@ export default function App() {
                       <a
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="group inline-flex flex-col text-left focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none"
+                        className="group inline-flex flex-col text-left focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
                       >
                         <span className="text-4xl sm:text-5.5xl font-black uppercase italic tracking-tighter transition-all duration-200 group-hover:text-accent group-hover:translate-x-3 group-hover:skew-x-3 inline-block whitespace-nowrap">
                           {link.label}
                         </span>
-                        <span className="text-[10px] font-mono tracking-widest uppercase opacity-40 group-hover:opacity-100 group-hover:text-magenta transition-all duration-200 mt-1 pl-1 whitespace-nowrap">
+                        <span className="text-[10px] font-mono tracking-widest uppercase opacity-40 group-hover:opacity-100 group-hover:text-accent transition-all duration-200 mt-1 pl-1 whitespace-nowrap">
                           // {link.desc}
                         </span>
                       </a>
@@ -709,7 +632,7 @@ export default function App() {
                     rel="noreferrer"
                     className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-bold hover:text-accent transition-colors whitespace-nowrap"
                   >
-                    <Instagram className="h-4.5 w-4.5 text-magenta" />
+                    <Instagram className="h-4.5 w-4.5 text-accent" />
                     <span>Instagram</span>
                   </a>
                 </div>
@@ -743,12 +666,12 @@ export default function App() {
           <div className="flex flex-col items-start pt-12 lg:pt-0">
             <div className="flex items-center gap-3 mb-8 animate-ink-reveal" style={{ animationDelay: '0.1s' }}>
               <span className="bg-ink text-canvas font-display text-lg px-5 py-2 leading-none relative shadow-md select-none transform -rotate-1 border border-canvas/10" style={{ clipPath: 'polygon(0 0, 100% 0%, 95% 100%, 0% 100%)' }}>
-                <span className="text-accent mr-1">✦</span> {lang === 'en' ? 'Unfiltered Heritage' : 'Naturtrübe Kultur'}
+                <span className="text-accent mr-1">✦</span> {lang === 'en' ? 'Unfiltered Heritage' : 'Lecker Bierchen'}
               </span>
             </div>
 
-            <h1 className="font-handwritten text-[2.5rem] sm:text-[4rem] md:text-[5.2rem] text-ink dark:text-canvas leading-[1.05] mb-6 animate-flutter normal-case tracking-normal text-balance" style={{ textShadow: theme === 'dark' ? '-2px 2px 0px oklch(0.15 0.05 165.0), 2px -2px 0px oklch(0.65 0.15 75.0 / 0.3)' : '-2px 2px 0px oklch(0.85 0.04 75.0), 2px -2px 0px oklch(0.42 0.13 165.0 / 0.2)', animationDelay: '0.2s' }}>
-              Atzen<span className="text-accent animate-misregistration">gold</span> Kellerbier {lang === 'en' ? 'Culture' : 'Kultur'}
+            <h1 className="font-handwritten text-[2.5rem] sm:text-[4rem] md:text-[5.2rem] text-ink leading-[1.05] mb-6 animate-flutter normal-case tracking-normal text-balance" style={{ textShadow: '-2px 2px 0px oklch(0.85 0.04 75.0), 2px -2px 0px oklch(0.42 0.13 165.0 / 0.2)', animationDelay: '0.2s' }}>
+              Atzen<span className="text-accent animate-misregistration">gold</span>{lang === 'en' ? ' Kellerbier Culture' : '-Bierkultur'}
             </h1>
 
             <p className="text-xl md:text-2xl text-ink-secondary dark:text-canvas/80 max-w-2xl mb-10 animate-ink-reveal text-pretty font-sans font-medium leading-relaxed" style={{ animationDelay: '0.3s' }}>
@@ -775,10 +698,10 @@ export default function App() {
                 whileHover={{ scale: 1.05, rotate: -1, zIndex: 10 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 500, damping: 25, delay: 0.5 }}
-                className="relative bg-[#FFCC00] text-black px-5 py-3.5 shadow-md border-4 border-black rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-black before:rounded-[4px] before:pointer-events-none"
+                className="relative bg-accent text-on-accent px-5 py-3.5 shadow-md border-4 border-ink rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-ink before:rounded-[4px] before:pointer-events-none"
               >
-                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-black">5.2%</span>
-                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-black/80 mt-2 uppercase leading-none">ABV SPEC //</span>
+                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-on-accent">5.2%</span>
+                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-on-accent/80 mt-2 uppercase leading-none">ABV SPEC //</span>
               </motion.div>
 
               {/* Sticker 2: Unfiltered (Green German Autobahn Direction Sign) */}
@@ -788,10 +711,10 @@ export default function App() {
                 whileHover={{ scale: 1.05, rotate: 4, zIndex: 10 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 500, damping: 25, delay: 0.65 }}
-                className="relative bg-[#007A33] text-white px-5 py-3.5 shadow-md border-4 border-white rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-white before:rounded-[4px] before:pointer-events-none"
+                className="relative bg-primary text-canvas px-5 py-3.5 shadow-md border-4 border-canvas rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-canvas before:rounded-[4px] before:pointer-events-none"
               >
-                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-white">100%</span>
-                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white/90 mt-2 uppercase leading-none">UNFILTERED</span>
+                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-canvas">100%</span>
+                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-canvas/90 mt-2 uppercase leading-none">UNFILTERED</span>
               </motion.div>
 
               {/* Sticker 3: Cuckoo Brewed (Blue Berlin U-Bahn Sign) */}
@@ -801,10 +724,10 @@ export default function App() {
                 whileHover={{ scale: 1.05, rotate: 1, zIndex: 10 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 500, damping: 25, delay: 0.8 }}
-                className="relative bg-[#0033A0] text-white px-5 py-3.5 shadow-md border-4 border-white rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-white before:rounded-[4px] before:pointer-events-none"
+                className="relative bg-ink text-canvas px-5 py-3.5 shadow-md border-4 border-canvas rounded-lg flex flex-col justify-center min-w-[120px] cursor-pointer origin-center before:absolute before:inset-[3px] before:border before:border-canvas before:rounded-[4px] before:pointer-events-none"
               >
-                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-white">Cuckoo</span>
-                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white/90 mt-2 uppercase leading-none">BREWED</span>
+                <span className="relative z-10 text-2xl font-extrabold font-sans leading-none tracking-tight text-canvas">Cuckoo</span>
+                <span className="relative z-10 text-[9px] font-mono font-bold tracking-widest text-canvas/90 mt-2 uppercase leading-none">BREWED</span>
               </motion.div>
 
             </div>
@@ -830,9 +753,8 @@ export default function App() {
       <Testimonials lang={lang} />
 
       {/* 5. Isometric Radar locator Map with Stocks & restock trigger notifications */}
-      <ThreeDMap 
-        lang={lang} 
-        onTriggerNotification={handleTriggerNotification} 
+      <ThreeDMap
+        onOpenDatenschutz={() => setShowDatenschutz(true)}
       />
 
       {/* 6. Merchandise Catalog & checkout modal flow */}
@@ -886,8 +808,8 @@ export default function App() {
         onClose={() => setShowAGB(false)}
       />
 
-      {/* 7. Frictionless Gastronomy & Retail Portal */}
-      <B2BPortal lang={lang} />
+      {/* 7. Frictionless Gastronomy & Retail Portal — auskommentiert, vorerst deaktiviert (Gabriel: "vielleicht benötigen wir das später") */}
+      {/* <B2BPortal lang={lang} /> */}
 
       {/* 7.5. Dynamic Instagram Channel Feed Showcase Section */}
       <InstagramFeed lang={lang} />
@@ -907,7 +829,7 @@ export default function App() {
       <footer className="bg-canvas dark:bg-primary-deep/10 border-t border-hairline py-16 px-4 md:px-8 relative overflow-hidden transition-colors duration-200">
         
         {/* Wheatpaste paper poster card container - faded, frayed edges and dot matrix textures */}
-        <div className="relative mx-auto max-w-7xl overflow-visible bg-[#f4f2eb] p-[3px] sm:p-[5px] wheatpaste-poster">
+        <div className="relative mx-auto max-w-7xl overflow-visible bg-canvas-soft p-[3px] sm:p-[5px] wheatpaste-poster">
 
           {/* Inner printed dark green poster layer */}
           <div className="bg-primary-deep dark:bg-brand-dark-900 text-canvas p-8 md:p-12 w-full h-full relative z-10">
@@ -920,15 +842,14 @@ export default function App() {
                 <div className="flex flex-col items-center lg:items-start group select-none">
                   <div className="flex items-center gap-1.5 sm:gap-3">
                     <GoldBarsSVG className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
-                    <img 
-                      src="https://static.wixstatic.com/media/f8d233_2bc00a5305a64a5da3d407506a80df3c~mv2.gif" 
-                      alt="Atzengold Logo" 
+                    <img
+                      src="/atzengold-logo.webp"
+                      alt="Atzengold Logo"
                       className="h-12 md:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
-                      referrerPolicy="no-referrer"
                     />
                     <GoldBarsSVG mirrored={true} className="w-8 h-6 sm:w-10 sm:h-7.5 shrink-0 select-none opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all filter drop-shadow-[0_0_4px_var(--color-accent)]" />
                   </div>
-                  <span className="text-xl sm:text-2xl font-handwritten text-accent mt-3 leading-none bg-canvas/5 px-3 py-1 rounded-lg border border-canvas/10">
+                  <span className="text-xl sm:text-2xl font-handwritten text-accent mt-3 leading-none">
                     Franken x Berlin
                   </span>
                 </div>
@@ -957,25 +878,7 @@ export default function App() {
               {/* Right Area: Menus + Newsletter underneath */}
               <div className="lg:col-span-8 flex flex-col gap-8">
                 {/* Menu columns */}
-                <div className="grid grid-cols-2 gap-8 w-full md:px-4">
-                  
-                  {/* Brewery column */}
-                  <div className="flex flex-col gap-3">
-                    <h4 className="text-xs uppercase tracking-wider text-accent font-bold font-sans">
-                      {lang === 'en' ? 'Brewery' : 'Brauerei'}
-                    </h4>
-                    <div className="flex flex-col gap-2 text-sm text-canvas/70 font-medium">
-                      <a href="#story" className="hover:text-accent transition-colors">
-                        {lang === 'en' ? 'Our Story' : 'Unsere Story'}
-                      </a>
-                      <a href="#philosophy" className="hover:text-accent transition-colors">
-                        {lang === 'en' ? 'Raw Values' : 'Naturtrübe Werte'}
-                      </a>
-                      <a href="#beer-finder" className="hover:text-accent transition-colors">
-                        {lang === 'en' ? 'Beer Finder' : 'Bier-Finder'}
-                      </a>
-                    </div>
-                  </div>
+                <div className="grid grid-cols-1 gap-8 w-full md:px-4">
 
                   {/* Legal column */}
                   <div className="flex flex-col gap-3">
@@ -1014,24 +917,19 @@ export default function App() {
                     {lang === 'en' ? 'Cookies' : 'Cookie-Einstellungen'}
                   </button>
 
+                  {/* Admin-CMS-Einstieg auskommentiert (Gabriel: "Nur auskommentieren") — Code bleibt erhalten.
                   <button
                     onClick={() => setIsAdmin(true)}
                     className="text-[10px] text-canvas/30 hover:text-accent transition-colors cursor-pointer text-left font-mono focus:outline-none opacity-40 hover:opacity-100"
                   >
                     Admin
                   </button>
+                  */}
                     </div>
                   </div>
 
                 </div>
 
-                {/* Newsletter - full width underneath menus */}
-                <div className="w-full space-y-4 md:px-4">
-                  <h4 className="text-xs uppercase tracking-wider text-accent font-bold font-sans">
-                    {lang === 'en' ? 'Stay Updated' : 'Atzen-Update'}
-                  </h4>
-                  <NewsletterSignup lang={lang} theme={theme} />
-                </div>
               </div>
 
             </div>
@@ -1059,11 +957,11 @@ export default function App() {
                   onClick={() => setLang(prev => prev === 'en' ? 'de' : 'en')}
                   aria-label={lang === 'en' ? "Switch to German" : "Switch to English"}
                   title={lang === 'en' ? "Switch to German" : "Switch to English"}
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-canvas/10 hover:scale-105 active:scale-95 transition-all duration-200 border border-canvas/20 shadow-sm overflow-hidden p-0 cursor-pointer focus:outline-none"
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-canvas/10 hover:scale-105 active:scale-95 transition-all duration-200 border border-canvas/20 shadow-sm p-0 cursor-pointer focus:outline-none text-canvas"
                 >
-                  <div className="w-full h-full scale-[1.05]">
-                    {lang === 'en' ? <UKFlagSVG /> : <GermanFlagSVG />}
-                  </div>
+                  <span className="text-xs font-bold font-mono tracking-wide">
+                    {lang === 'en' ? 'EN' : 'DE'}
+                  </span>
                 </button>
                 <a 
                   href="mailto:info@atzengold.net" 

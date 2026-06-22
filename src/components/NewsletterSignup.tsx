@@ -1,53 +1,54 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Mail, ArrowRight, Loader2, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { Loader2, CheckCircle2, AlertCircle, MapPin } from 'lucide-react';
 
 interface NewsletterSignupProps {
-  lang: 'de' | 'en' | 'de-BY';
-  theme: 'dark' | 'light';
+  lang?: 'de' | 'en';
+  onOpenDatenschutz?: () => void;
 }
 
 const LOCAL_TRANSLATIONS = {
   de: {
-    title: "Post vom Späti-Eck",
-    subtitle: "Trag dich für den Atzengold-Ticker ein. Kein Spam, nur echte Straßen-News, geheime Pop-ups und frischer Merch-Drop-Alarm.",
-    placeholder: "Deine Atzen-E-Mail...",
-    button: "Anmelden",
+    title: "Bei Dir noch nicht erhältlich?",
+    subtitle: "Sorry, wir sind noch klein, aber lass' Deine PLZ da und wir sagen Dir Bescheid wenn es uns in Deiner Nähe gibt ✌️",
+    namePlaceholder: "Vorname",
+    plzPlaceholder: "PLZ",
+    emailPlaceholder: "E-Mail",
+    privacyLabel: "Ich habe die ",
+    privacyLink: "Datenschutzerklärung",
+    privacyLabelEnd: " gelesen und akzeptiere sie.",
+    button: "Abschicken",
     loading: "Wird verschickt...",
     successTitle: "Einwandfrei, Atze!",
-    successText: "Du bist jetzt im Ticker! Schnapp dir dein Frischbier, wir melden uns bald mit exklusiven Aktionen.",
+    successText: "Danke! Wir melden uns, sobald es Atzengold in deiner Nähe gibt.",
     invalidEmail: "Gib bitte eine richtige E-Mail-Adresse ein!",
-    alreadySubscribed: "Diese E-Mail ist bereits registriert!",
-    disclaimer: "Abgabe von News nur an Personen im durstigen Alter. jederzeit abbestellbar."
-  },
-  'de-BY': {
-    title: "Post vom Bier-Revier",
-    subtitle: "Trag di fürn Atzengold-Kanal ei! Koa Schmarrn, bloß echte Gschichten, geheime Standorte und frischer Gwand-Drop-Alarm.",
-    placeholder: "Dei Atzn-E-Mail...",
-    button: "Abonnieren",
-    loading: "Wird gschickt...",
-    successTitle: "Aba sowas von!",
-    successText: "Du bist etz im Ticker! Beidl dei Tragerl, wir meldn uns demnächst mit exklusiven Gaudi-Aktionen.",
-    invalidEmail: "Sacklzement, gib a gscheide E-Mail-Adresse ei!",
-    alreadySubscribed: "De E-Mail-Adress hamma fei scho!",
-    disclaimer: "Abgab eh erst ab 16. Und abbestelln kannst des Gschmarri fei a jederzeit."
+    invalidPlz: "Gib bitte eine gültige PLZ ein!",
+    invalidPrivacy: "Bitte akzeptiere die Datenschutzerklärung."
   },
   en: {
-    title: "Asphalt Dispatches",
-    subtitle: "Subscribe to the Atzengold newsletter. Zero spam, just raw pavement updates, pop-up announcements, and fresh merch alerts.",
-    placeholder: "Your email adress...",
-    button: "Subscribe",
-    loading: "Signing up...",
+    title: "Not available near you yet?",
+    subtitle: "Sorry, we're still small, but leave your zip code and we'll let you know when we're near you ✌️",
+    namePlaceholder: "First name",
+    plzPlaceholder: "Zip code",
+    emailPlaceholder: "Email",
+    privacyLabel: "I have read the ",
+    privacyLink: "privacy policy",
+    privacyLabelEnd: " and accept it.",
+    button: "Submit",
+    loading: "Sending...",
     successTitle: "Outstanding, Atze!",
-    successText: "You are on the list! Grab a cold unfiltered one, we'll keep you posted with secret corner drops soon.",
+    successText: "Thanks! We'll let you know once Atzengold is available near you.",
     invalidEmail: "Please enter a valid email address!",
-    alreadySubscribed: "This email is already subscribed!",
-    disclaimer: "Dispatches intended for thirsty folks. Opt-out anytime."
+    invalidPlz: "Please enter a valid zip code!",
+    invalidPrivacy: "Please accept the privacy policy."
   }
 };
 
-export default function NewsletterSignup({ lang, theme }: NewsletterSignupProps) {
+export default function NewsletterSignup({ lang = 'de', onOpenDatenschutz }: NewsletterSignupProps) {
+  const [name, setName] = useState('');
+  const [plz, setPlz] = useState('');
   const [email, setEmail] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -57,23 +58,27 @@ export default function NewsletterSignup({ lang, theme }: NewsletterSignupProps)
     e.preventDefault();
     setErrorMessage('');
 
-    // Native validation
-    if (!email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
       setStatus('error');
       setErrorMessage(t.invalidEmail);
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!plz || plz.trim().length < 4) {
       setStatus('error');
-      setErrorMessage(t.invalidEmail);
+      setErrorMessage(t.invalidPlz);
+      return;
+    }
+
+    if (!privacyAccepted) {
+      setStatus('error');
+      setErrorMessage(t.invalidPrivacy);
       return;
     }
 
     setStatus('loading');
 
-    // Perform serverless email forwarding request
     fetch('/api/send-email', {
       method: 'POST',
       headers: {
@@ -81,7 +86,9 @@ export default function NewsletterSignup({ lang, theme }: NewsletterSignupProps)
       },
       body: JSON.stringify({
         type: 'newsletter',
-        email
+        email,
+        name,
+        plz
       })
     })
       .then(async (res) => {
@@ -89,125 +96,158 @@ export default function NewsletterSignup({ lang, theme }: NewsletterSignupProps)
           throw new Error('Subscription failed');
         }
         setStatus('success');
+        setName('');
+        setPlz('');
         setEmail('');
       })
-      .catch((err) => {
+      .catch(() => {
         setStatus('error');
         setErrorMessage(t.invalidEmail);
       });
   };
 
-  // The wrapper styling uses the new organic theme: rounded corners, soft shadows, and paper texture
   return (
-    <div 
+    <div
       id="newsletter-signup-box"
-      className="relative w-full p-8 md:p-12 rounded-3xl border border-ink/10 bg-accent shadow-xl overflow-hidden texture-paper transition-all"
+      className="relative w-full p-6 md:p-8 rounded-2xl border-2 border-primary bg-canvas shadow-md overflow-hidden transition-all"
     >
       <AnimatePresence mode="wait">
         {status === 'success' ? (
-          /* Animated high-fidelity success state view representation */
           <motion.div
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="flex flex-col items-center text-center py-6 space-y-4"
+            className="flex flex-col items-center text-center py-6 space-y-3"
           >
-            <div className="w-16 h-16 bg-canvas/90 rounded-full flex items-center justify-center text-ink shadow-md border border-ink/10 animate-bounce">
-              <CheckCircle2 className="h-8 w-8" />
+            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary shadow-sm border border-primary/20">
+              <CheckCircle2 className="h-7 w-7" />
             </div>
-
             <div className="space-y-1">
-              <h3 className="text-xl font-display font-black tracking-widest flex items-center justify-center gap-2">
-                <Sparkles className="h-5 w-5 text-ink animate-pulse" />
+              <h3 className="text-lg font-display font-black text-ink">
                 {t.successTitle}
               </h3>
-              <p className="text-xs max-w-sm font-sans font-bold text-ink/80">
+              <p className="text-xs max-w-sm font-sans font-medium text-ink-secondary">
                 {t.successText}
               </p>
             </div>
-
             <button
               onClick={() => setStatus('idle')}
-              className="mt-2 cursor-pointer text-xs font-mono font-bold uppercase underline tracking-wider text-ink hover:bg-ink hover:text-accent px-2 py-1 transition-colors animate-snap"
+              className="mt-1 cursor-pointer text-xs font-mono font-bold uppercase underline tracking-wider text-primary hover:text-primary/80 transition-colors"
             >
-              {lang === 'en' ? 'Register another email' : 'Weitere E-Mail eintragen'}
+              {lang === 'en' ? 'Notify another zip code' : 'Weitere PLZ eintragen'}
             </button>
           </motion.div>
         ) : (
-          /* Main Interactive Newsletter Signup Input fields section */
           <motion.div
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="space-y-6"
+            className="space-y-5"
           >
-            <div className="space-y-2">
-              <h3 className="text-[2rem] sm:text-[2.375rem] font-handwritten font-bold tracking-normal flex items-center gap-2 text-ink">
-                <Mail className="h-6 w-6 text-ink" />
+            <div className="space-y-1.5">
+              <h3 className="text-xl sm:text-2xl font-handwritten font-bold text-ink flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
                 {t.title}
               </h3>
-              <p className="text-sm font-bold font-sans max-w-lg leading-snug text-ink">
+              <p className="text-sm font-medium font-sans max-w-lg leading-snug text-ink-secondary">
                 {t.subtitle}
               </p>
             </div>
- 
-            <form onSubmit={handleSubscribe} className="space-y-4 relative z-10">
-              <div className="flex flex-col sm:flex-row gap-4 relative">
-                <div className="relative flex-1">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/60">
-                    <Mail className="h-5 w-5" />
-                  </span>
-                  
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (status === 'error') setStatus('idle');
-                    }}
-                    placeholder={t.placeholder}
-                    disabled={status === 'loading'}
-                    className="w-full py-4 pl-12 pr-4 bg-canvas/90 backdrop-blur-sm rounded-xl border border-ink/20 text-ink font-mono font-bold text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-ink focus:bg-white transition-all shadow-inner"
-                  />
-                </div>
- 
-                <button
-                  type="submit"
+
+            <form onSubmit={handleSubscribe} className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  placeholder={t.namePlaceholder}
                   disabled={status === 'loading'}
-                  className="shrink-0 cursor-pointer bg-[#0033A0] hover:bg-[#002a80] text-white px-8 py-4 text-xs font-sans font-black uppercase tracking-wider transition-all duration-200 shadow-md hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:cursor-wait rounded-lg border-4 border-white relative before:absolute before:inset-[3px] before:border before:border-white before:rounded-[3px] before:pointer-events-none"
-                >
-                  {status === 'loading' ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span className="font-mono text-xs">{t.loading}</span>
-                    </>
-                  ) : (
-                    <span>{t.button}</span>
-                  )}
-                </button>
+                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                />
+                <input
+                  type="text"
+                  value={plz}
+                  onChange={(e) => {
+                    setPlz(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  placeholder={t.plzPlaceholder}
+                  disabled={status === 'loading'}
+                  className="w-full sm:w-28 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  placeholder={t.emailPlaceholder}
+                  disabled={status === 'loading'}
+                  className="flex-1 py-3 px-4 bg-canvas-soft rounded-lg border border-ink/20 text-ink font-sans text-sm placeholder-ink/50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                />
               </div>
 
-              {/* Error feedback alert popup banner inline */}
+              <label className="flex items-start gap-2.5 text-xs text-ink-secondary font-medium cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={privacyAccepted}
+                  onChange={(e) => {
+                    setPrivacyAccepted(e.target.checked);
+                    if (status === 'error') setStatus('idle');
+                  }}
+                  className="mt-0.5 h-4 w-4 rounded border-ink/30 text-primary focus:ring-primary shrink-0"
+                />
+                <span>
+                  {t.privacyLabel}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onOpenDatenschutz?.();
+                    }}
+                    className="underline hover:text-primary transition-colors cursor-pointer"
+                  >
+                    {t.privacyLink}
+                  </button>
+                  {t.privacyLabelEnd}
+                </span>
+              </label>
+
               <AnimatePresence>
                 {status === 'error' && (
                   <motion.div
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
-                    className="flex items-center gap-2 text-xs font-mono font-bold text-red-800 bg-red-50 rounded-xl border border-red-200 p-3 shadow-sm"
+                    className="flex items-center gap-2 text-xs font-mono font-bold text-ink bg-primary/5 rounded-lg border border-primary/20 p-3 shadow-sm"
                   >
                     <AlertCircle className="h-4 w-4 shrink-0" />
                     <span>{errorMessage}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </form>
 
-            <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-ink/70">
-              {t.disclaimer}
-            </p>
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="cursor-pointer bg-primary hover:bg-primary/90 text-canvas px-8 py-3 text-sm font-sans font-bold uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.01] active:scale-95 disabled:opacity-70 disabled:cursor-wait rounded-lg w-full sm:w-auto flex items-center justify-center gap-2"
+              >
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>{t.loading}</span>
+                  </>
+                ) : (
+                  <span>{t.button}</span>
+                )}
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

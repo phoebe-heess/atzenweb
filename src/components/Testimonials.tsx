@@ -11,97 +11,21 @@ interface RawTestimonial {
   textEN: string;
   image: string;
   location: string;
+  untappdUrl?: string;
 }
 
-const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
-  {
-    id: 't1',
-    textDE: "Endlich ein Bier, das schmeckt wie früher. Schön süffig und naturtrüb direkt vom Fass am Pflaster.",
-    textEN: "Finally a beer that tastes like the good old days. Incredibly drinkable and beautifully cloudy straight on the pavement.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Lukas Schmidt",
-    role: "Kneipen-Gänger, Nürnberg",
-    location: "nurnberg",
-  },
-  {
-    id: 't2',
-    textDE: "Atzengold hat die Berliner Späti-Seele nach Fürth gebracht. Der beste Begleiter für lange Nächte am Heizhaus.",
-    textEN: "Atzengold brought the Berlin Späti soul to Franconia. The absolute best companion for long nights near Heizhaus.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Moritz Reinhardt",
-    role: "Späti-Liebhaber, Fürth",
-    location: "furth",
-  },
-  {
-    id: 't3',
-    textDE: "Unglaublich süffig und herrlich unfiltriert. Die Kohlensäure ist perfekt ausbalanciert – extrem gefährlich lecker!",
-    textEN: "Unbelievably smooth and delightfully unfiltered. Carbonation is spot on – extremely dangerously delicious!",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Sarah König",
-    role: "Atzin vom Dienst, Berlin",
-    location: "berlin",
-  },
-  {
-    id: 't4',
-    textDE: "Als Franke bin ich beim Bier echt wählerisch. Aber das Atzengold Hell hat mich absolut umgehauen.",
-    textEN: "Being Franconian, I am very picky about my cellar beers. But Atzengold completely blew me away.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Jonas Bergmann",
-    role: "Stammgast, Gostenhof",
-    location: "nurnberg",
-  },
-  {
-    id: 't5',
-    textDE: "Einfach ehrlich. Kein Schnickschnack. Schmeckt am besten im Sonnenuntergang auf der Bordsteinkante.",
-    textEN: "Simply honest. No nonsense. Tastes best during sunset sitting directly on the pavement curb.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Max Krüger",
-    role: "Pavement-Genießer, Berlin",
-    location: "berlin",
-  },
-  {
-    id: 't6',
-    textDE: "Das Design der Flasche hat mich angelockt, der ehrliche Geschmack hat mich zum Fan gemacht. Ein Hoch auf die Atzen!",
-    textEN: "The bottle art drew me in, the honest flavor made me a lifelong fan. Cheers to the Atzen!",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Elena Wagner",
-    role: "Atzin der ersten Stunde, Nürnberg",
-    location: "nurnberg",
-  },
-  {
-    id: 't7',
-    textDE: "Egal ob beim Grillen an der Pegnitz oder Späti-Tour in Kreuzberg: Atzengold gehört einfach dazu.",
-    textEN: "Whether grilling by the Pegnitz river or doing a Späti tour in Kreuzberg, Atzold is always there.",
-    image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Farhan Ali",
-    role: "Pegnitz-Griller, Nürnberg",
-    location: "nurnberg",
-  },
-  {
-    id: 't8',
-    textDE: "Ein ehrliches fränkisches Kellerbier mit der perfekten Portion Berliner Schnauze. Das neue Standardbier bei uns.",
-    textEN: "An honest Franconian Kellerbier with a perfect portion of Berlin character. Our new go-to standard.",
-    image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Sina Beck",
-    role: "Biergarten-Fan, Erlangen",
-    location: "erlangen",
-  },
-  {
-    id: 't9',
-    textDE: "Gekühlt am besten, aber läuft auch lauwarm an der Ecke runter wie Öl. Absoluter Atzen-Klassiker.",
-    textEN: "Best when chilled, but flows down like oil even lukewarm at the corner. Absolute Atzen classic.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&h=100&q=80",
-    name: "Hassan Al-Saeed",
-    role: "Bordstein-Philosoph, Fürth",
-    location: "furth",
-  }
-];
+// TODO: Echte Untappd-Bewertungen eintragen, sobald Gabriel die Links schickt
+// ("Ich schicke dir die jeweiligen Links noch zu"). Bis dahin bleibt die Liste
+// leer und der Bereich wird unten ausgeblendet, statt erfundene Stimmen zu zeigen.
+// Erwartetes Format pro Eintrag:
+// { id, name, role, textDE, textEN, image, location, untappdUrl }
+const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [];
 
 export default function Testimonials({ lang = 'de' }: { lang?: string }) {
   const [rawTestimonials, setRawTestimonials] = useState<RawTestimonial[]>(FALLBACK_TESTIMONIALS_RAW);
 
   useEffect(() => {
-    fetchTestimonials().then(data => { if (data) setRawTestimonials(data); });
+    fetchTestimonials().then(data => { if (data && data.length) setRawTestimonials(data); });
   }, []);
 
   const testimonials: TestimonialType[] = useMemo(() => {
@@ -112,8 +36,15 @@ export default function Testimonials({ lang = 'de' }: { lang?: string }) {
       name: t.name,
       role: t.role,
       location: t.location as TestimonialType['location'],
+      untappdUrl: t.untappdUrl,
     }));
   }, [rawTestimonials, lang]);
+
+  // Solange keine echten Untappd-Bewertungen vorliegen, Bereich ausblenden
+  // statt erfundene Testimonials zu zeigen.
+  if (testimonials.length === 0) {
+    return null;
+  }
 
   const firstColumn = testimonials.slice(0, 3);
   const secondColumn = testimonials.slice(3, 6);

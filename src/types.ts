@@ -1,5 +1,5 @@
 export type City = 'Franconia' | 'Berlin';
-export type Language = 'de' | 'en' | 'de-BY';
+export type Language = 'de' | 'en';
 export type BeerType = 'hell' | 'dunkel' | 'alkoholfrei';
 
 export interface TranslationOverride {
@@ -98,4 +98,5 @@ export interface StoryNode {
   tagline: string;
   taglineEn: string;
   image: string;
+  gifUrl?: string;
 }

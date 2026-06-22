@@ -58,7 +58,7 @@ export default function ProductDetail({ item, lang, onAddToCart, onClose }: Prod
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink/5 dark:bg-canvas/5 border border-ink/10 dark:border-canvas/10 flex items-center justify-center">
-              {images[selectedImage]?.startsWith('http') ? (
+              {(images[selectedImage]?.startsWith('http') || images[selectedImage]?.startsWith('/')) ? (
                 <button
                   onClick={() => setLightboxIndex(selectedImage)}
                   className="w-full h-full cursor-zoom-in border-none p-0 bg-transparent"
@@ -104,7 +104,7 @@ export default function ProductDetail({ item, lang, onAddToCart, onClose }: Prod
                         : 'border-transparent hover:border-ink/20 dark:hover:border-canvas/20'
                     }`}
                   >
-                    {url?.startsWith('http') ? (
+                    {(url?.startsWith('http') || url?.startsWith('/')) ? (
                       <img src={url} alt="" className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full bg-ink/5 dark:bg-canvas/5 flex items-center justify-center text-xs text-ink/30 dark:text-canvas/30">
@@ -182,8 +182,8 @@ export default function ProductDetail({ item, lang, onAddToCart, onClose }: Prod
               onClick={handleAddToCart}
               className={`w-full rounded-xl font-display font-bold uppercase py-4 px-6 transition-all flex items-center justify-center gap-2 text-lg border-none cursor-pointer ${
                 added
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-ink dark:bg-accent text-canvas dark:text-on-accent hover:bg-zinc-800 dark:hover:bg-accent-hover shadow-md hover:shadow-lg'
+                  ? 'bg-primary text-canvas'
+                  : 'bg-ink dark:bg-accent text-canvas dark:text-on-accent hover:bg-ink/90 dark:hover:bg-accent-hover shadow-md hover:shadow-lg'
               }`}
             >
               <ShoppingCart className="h-5 w-5" />
@@ -193,14 +193,14 @@ export default function ProductDetail({ item, lang, onAddToCart, onClose }: Prod
         </div>
       </div>
 
-      {lightboxIndex !== null && images[lightboxIndex]?.startsWith('http') && (
+      {lightboxIndex !== null && (images[lightboxIndex]?.startsWith('http') || images[lightboxIndex]?.startsWith('/')) && (
         <div
-          className="fixed inset-0 z-60 bg-black/90 flex items-center justify-center cursor-zoom-out touch-pinch-zoom"
+          className="fixed inset-0 z-60 bg-ink/90 flex items-center justify-center cursor-zoom-out touch-pinch-zoom"
           onClick={() => setLightboxIndex(null)}
         >
           <button
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border-none cursor-pointer z-10"
+            className="absolute top-4 right-4 p-2 rounded-full bg-canvas/10 hover:bg-canvas/20 text-canvas transition-colors border-none cursor-pointer z-10"
           >
             <X className="h-6 w-6" />
           </button>
@@ -209,13 +209,13 @@ export default function ProductDetail({ item, lang, onAddToCart, onClose }: Prod
             <>
               <button
                 onClick={e => { e.stopPropagation(); setLightboxIndex(i => (i! - 1 + images.length) % images.length); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border-none cursor-pointer z-10"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-canvas/10 hover:bg-canvas/20 text-canvas transition-colors border-none cursor-pointer z-10"
               >
                 <ChevronLeft className="h-8 w-8" />
               </button>
               <button
                 onClick={e => { e.stopPropagation(); setLightboxIndex(i => (i! + 1) % images.length); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border-none cursor-pointer z-10"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-canvas/10 hover:bg-canvas/20 text-canvas transition-colors border-none cursor-pointer z-10"
               >
                 <ChevronRight className="h-8 w-8" />
               </button>

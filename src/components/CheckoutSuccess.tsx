@@ -38,8 +38,8 @@ export default function CheckoutSuccess({ lang, orderId, onClose }: CheckoutSucc
         </div>
 
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-900/30 mb-6">
-            <CheckCircle className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 dark:bg-primary/20 mb-6">
+            <CheckCircle className="h-10 w-10 text-primary dark:text-primary" />
           </div>
           <h1 className="text-3xl md:text-4xl font-handwritten font-bold text-ink dark:text-canvas normal-case mb-3">
             {t.shopCheckoutSuccess}
@@ -57,7 +57,7 @@ export default function CheckoutSuccess({ lang, orderId, onClose }: CheckoutSucc
         )}
 
         {error && (
-          <div className="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-700 dark:text-amber-300">
+          <div className="rounded-xl bg-accent/10 dark:bg-accent/20 border border-accent/20 dark:border-accent/30 p-4 text-sm text-ink dark:text-canvas">
             {error}
           </div>
         )}
@@ -96,7 +96,7 @@ export default function CheckoutSuccess({ lang, orderId, onClose }: CheckoutSucc
                 </span>
                 <span className="font-bold text-ink dark:text-canvas">
                   {order.shipping === 0
-                    ? <span className="text-emerald-600 dark:text-emerald-400">{lang === 'en' ? 'Free' : 'Gratis'}</span>
+                    ? <span className="text-primary dark:text-primary">{lang === 'en' ? 'Free' : 'Gratis'}</span>
                     : `€${order.shipping.toFixed(2)}`}
                 </span>
               </div>

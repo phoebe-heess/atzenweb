@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { type, email, name, company, message, items } = req.body;
+  const { type, email, name, company, message, items, plz } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
@@ -37,7 +37,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 5px;">
           <h2 style="color: #0b3d2c;">Prost! Willkommen im Atzengold Verteiler!</h2>
           <p>Es gibt eine neue Newsletter-Anmeldung von:</p>
+          ${name ? `<p><strong>Vorname:</strong> ${name}</p>` : ''}
           <p><strong>E-Mail:</strong> <a href="mailto:${email}">${email}</a></p>
+          ${plz ? `<p><strong>PLZ:</strong> ${plz}</p>` : ''}
           <hr style="border: 0; border-top: 1px solid #eaeaea; margin: 20px 0;" />
           <p style="font-size: 12px; color: #666;">Diese E-Mail wurde automatisch über das Atzengold-Webportal gesendet.</p>
         </div>
@@ -80,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `;
     }
 
-    const recipient = process.env.CONTACT_EMAIL || 'soundofnairobi@gmail.com';
+    const recipient = process.env.CONTACT_EMAIL || 'gp@atzengold.net';
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',

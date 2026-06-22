@@ -1,55 +1,37 @@
 [
   {
-    "id": "m1",
-    "name": "Atzengold \"Kutscher\" 5-Panel Cap",
-    "price": 24.90,
-    "promoPrice": 22.00,
-    "image": "cap",
-    "images": ["cap"],
-    "description": "Black water-resistant organic canvas with custom gold stenciled \"Atzengold\" raw embroidery. Flat brim style.",
+    "id": "hoodie",
+    "name": "Atzengold Hoodie",
+    "price": 48.00,
+    "image": "https://static.wixstatic.com/media/f8d233_d94d43b5c3764814954bb9f0f182a220~mv2.png",
+    "images": ["https://static.wixstatic.com/media/f8d233_d94d43b5c3764814954bb9f0f182a220~mv2.png"],
+    "description": "Das Leben ist zu kurz für billige Hoodies\n\nUltrageile Qualität und dabei auch noch nachhaltig produziert ♥‿♥",
+    "category": "Apparel",
+    "sizes": ["S", "M", "L", "XL"],
+    "inStock": true
+  },
+  {
+    "id": "hainberg-shirt",
+    "name": "Hainberg Shirt",
+    "price": 34.00,
+    "image": "https://static.wixstatic.com/media/f8d233_bc439fd6c3444daab0a096ebec84262c~mv2.png",
+    "images": [
+      "https://static.wixstatic.com/media/f8d233_bc439fd6c3444daab0a096ebec84262c~mv2.png",
+      "https://static.wixstatic.com/media/f8d233_c740de0acee142949943dde42c21ac4e~mv2.png"
+    ],
+    "description": "Ähnlichkeiten zu einem gewissen Club sind rein zufällig. Dicke Qualität, Nachhaltig produziert",
+    "category": "Apparel",
+    "sizes": ["S", "M", "L", "XL"],
+    "inStock": true
+  },
+  {
+    "id": "long-papers",
+    "name": "Atzengold Long Papers",
+    "price": 48.00,
+    "image": "/images/merch/long-papers.webp",
+    "images": ["/images/merch/long-papers.webp"],
+    "description": "Atzengold Rollpapier mit Filter 26 Stück pro Box.",
     "category": "Accessory",
-    "inStock": true
-  },
-  {
-    "id": "m5",
-    "name": "Atzen-Shirt \"Classic Gold\"",
-    "price": 29.90,
-    "image": "shirt",
-    "images": ["shirt"],
-    "description": "100% fine organic ring-spun combed cotton. High-comfort heavyweight streetwear fit featuring the iconic stenciled gold brand crest.",
-    "category": "Apparel",
-    "sizes": ["S", "M", "L", "XL"],
-    "inStock": true
-  },
-  {
-    "id": "m2",
-    "name": "Atzen-Hoodie \"Naturtrüb\" (Oversized)",
-    "price": 69.90,
-    "image": "hoodie",
-    "images": ["hoodie"],
-    "description": "450gsm heavyweight sand-washed organic cotton with original Berlin-Bavaria spray-stencil back print.",
-    "category": "Apparel",
-    "sizes": ["S", "M", "L", "XL"],
-    "inStock": true
-  },
-  {
-    "id": "m3",
-    "name": "Bayerischer Steinkrug (0.5L)",
-    "price": 19.90,
-    "image": "mug",
-    "images": ["mug"],
-    "description": "Handcrafted grey stoneware beer mug which keeps Atzengold Kellerbier cold much longer than glass. Cobalt fired logo.",
-    "category": "Drinkware",
-    "inStock": true
-  },
-  {
-    "id": "m4",
-    "name": "Atzen-Glas Goldrand Edition",
-    "price": 12.90,
-    "image": "glass",
-    "images": ["glass"],
-    "description": "Thin-walled elegant crystal lager glass with real fluid gold rim styling. Elevates yeast citrus aromas.",
-    "category": "Drinkware",
     "inStock": true
   }
 ]

@@ -23,6 +23,7 @@ import Map, { Marker } from 'react-map-gl/maplibre';
 import type { MapRef } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import useSupercluster from 'use-supercluster';
+import NewsletterSignup from './NewsletterSignup';
 
 interface Venue {
   id: string;
@@ -43,78 +44,243 @@ interface Venue {
 const FALLBACK_VENUES: Venue[] = [
   {
     id: 'v1',
-    name: 'REWE Supermarkt',
-    type: 'Supermarkt',
+    name: 'Maisch Marika',
+    type: 'Lebensmittel',
     isGastronomy: false,
-    address: 'Königstraße 120, 90762 Fürth',
-    distance: 0.32,
-    rating: '4.2',
+    address: 'Hirschenstr. 46, 90762 Fürth',
+    distance: 0,
+    rating: '',
     isOpen: true,
-    openingHours: '07:00 - 20:00',
-    hasFood: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
     dogFriendly: false,
-    longitude: 11.015,
-    latitude: 49.457
+    longitude: 10.9845882,
+    latitude: 49.4728532
   },
   {
     id: 'v2',
-    name: 'EDEKA Schätz',
+    name: 'REWE Michael Maier oHG',
     type: 'Supermarkt',
     isGastronomy: false,
-    address: 'Waldstraße 101, 90763 Fürth',
-    distance: 0.5,
-    rating: '4.5',
+    address: 'Münchener Str. 35, 91567 Herrieden',
+    distance: 0,
+    rating: '',
     isOpen: true,
-    openingHours: '07:00 - 20:00',
-    hasFood: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
     dogFriendly: false,
-    longitude: 11.020,
-    latitude: 49.454
+    longitude: 10.5021927,
+    latitude: 49.2352004
   },
   {
     id: 'v3',
-    name: 'Späti am Heizhaus',
-    type: 'Späti',
+    name: 'REWE Fröhlich oHG',
+    type: 'Supermarkt',
     isGastronomy: false,
-    address: 'Wandererstraße 89, 90429 Nürnberg',
-    distance: 0.1,
-    rating: '4.8',
+    address: 'Strawinskystr. 27A, 90455 Nürnberg',
+    distance: 0,
+    rating: '',
     isOpen: true,
-    openingHours: '14:00 - 02:00',
+    openingHours: 'Reguläre Geschäftszeiten',
     hasFood: false,
-    dogFriendly: true,
-    longitude: 11.017,
-    latitude: 49.456
+    dogFriendly: false,
+    longitude: 11.0637311,
+    latitude: 49.3475173
   },
   {
     id: 'v4',
-    name: 'Getränkemarkt',
-    type: 'Getränkemarkt',
+    name: 'REWE Pascal Kneuer oHG',
+    type: 'Supermarkt',
     isGastronomy: false,
-    address: 'Leyher Straße 70, 90431 Nürnberg',
-    distance: 0.8,
-    rating: '4.0',
-    isOpen: false,
-    openingHours: '09:00 - 18:00',
+    address: 'Karl-Zucker-Str. 10, 91052 Erlangen',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
     hasFood: false,
     dogFriendly: false,
-    longitude: 11.022,
-    latitude: 49.458
+    longitude: 11.0048406,
+    latitude: 49.5833453
   },
   {
     id: 'v5',
-    name: 'Biergarten Wöhrder Wiese',
-    type: 'Biergarten',
-    isGastronomy: true,
-    address: 'Wassertorstraße 5, 90489 Nürnberg',
-    distance: 1.2,
-    rating: '4.7',
+    name: 'Bisloher Getränkeland GmbH',
+    type: 'Getränkemarkt',
+    isGastronomy: false,
+    address: 'Industriestr. 2, 90765 Fürth',
+    distance: 0,
+    rating: '',
     isOpen: true,
-    openingHours: '11:00 - 23:00',
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.0056912,
+    latitude: 49.5107603
+  },
+  {
+    id: 'v6',
+    name: 'Landauer GmbH',
+    type: 'Lebensmittel & Getränke',
+    isGastronomy: false,
+    address: 'Fürther Str. 27 b, 90587 Siegelsdorf',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 10.8860934,
+    latitude: 49.5068444
+  },
+  {
+    id: 'v7',
+    name: 'Trunk GmbH & Co. KG',
+    type: 'Getränke-Großhandel',
+    isGastronomy: false,
+    address: 'Heigern 4 - 8, 97286 Winterhausen',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 10.0131726,
+    latitude: 49.7063725
+  },
+  {
+    id: 'v8',
+    name: 'E-Center Schätz',
+    type: 'Supermarkt',
+    isGastronomy: false,
+    address: 'Würzburger Str. 140, 90766 Fürth',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 10.9639846,
+    latitude: 49.4837335
+  },
+  {
+    id: 'v9',
+    name: 'JK-Security-Systems',
+    type: 'Partner',
+    isGastronomy: false,
+    address: 'Atzenhofer Str. 61, 90768 Fürth',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 10.9517724,
+    latitude: 49.505549
+  },
+  {
+    id: 'v10',
+    name: 'Bierhimmel Gastro Betriebs GmbH',
+    type: 'Gastronomie',
+    isGastronomy: true,
+    address: 'Friedrich-Ebert-Str. 100, 90766 Fürth',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Öffnungszeiten',
     hasFood: true,
-    dogFriendly: true,
-    longitude: 11.025,
-    latitude: 49.453
+    dogFriendly: false,
+    longitude: 10.9738711,
+    latitude: 49.4863731
+  },
+  {
+    id: 'v11',
+    name: 'Die Getränkeritter',
+    type: 'Getränkemarkt',
+    isGastronomy: false,
+    address: 'Richtweg 60, 90530 Wendelstein',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.1624629,
+    latitude: 49.3522364
+  },
+  {
+    id: 'v12',
+    name: 'Kulinarikwelten Stengel',
+    type: 'Feinkost',
+    isGastronomy: false,
+    address: 'Waldstr. 105, 90763 Fürth',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: true,
+    dogFriendly: false,
+    longitude: 11.0087916,
+    latitude: 49.4585024
+  },
+  {
+    id: 'v13',
+    name: 'Edeka Schätz',
+    type: 'Supermarkt',
+    isGastronomy: false,
+    address: 'Kurt-Triest-Str. 5, 90441 Nürnberg',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.044144,
+    latitude: 49.4317593
+  },
+  {
+    id: 'v14',
+    name: 'Sagasser Fachmarkt',
+    type: 'Getränkefachmarkt',
+    isGastronomy: false,
+    address: 'Sandäcker 1, 91301 Forchheim',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Reguläre Geschäftszeiten',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.0723711,
+    latitude: 49.695244
+  },
+  {
+    id: 'v15',
+    name: 'Heizhaus',
+    type: 'Kulturzentrum',
+    isGastronomy: true,
+    address: 'Wandererstr. 98c, 90431 Nürnberg',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Veranstaltungsabhängig',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.0300497,
+    latitude: 49.4575983
+  },
+  {
+    id: 'v16',
+    name: 'Desi Club Nürnberg',
+    type: 'Club',
+    isGastronomy: true,
+    address: 'Brückenstraße 23, 90419 Nürnberg',
+    distance: 0,
+    rating: '',
+    isOpen: true,
+    openingHours: 'Veranstaltungsabhängig',
+    hasFood: false,
+    dogFriendly: false,
+    longitude: 11.0596351,
+    latitude: 49.4581542
   }
 ];
 
@@ -131,7 +297,11 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   return parseFloat((R * c).toFixed(2));
 }
 
-export default function ThreeDMap() {
+interface ThreeDMapProps {
+  onOpenDatenschutz?: () => void;
+}
+
+export default function ThreeDMap({ onOpenDatenschutz }: ThreeDMapProps = {}) {
   const [viewport, setViewport] = useState({
     longitude: 11.0182, // Heizhaus Nürnberg
     latitude: 49.4566,
@@ -311,7 +481,7 @@ export default function ThreeDMap() {
   };
 
   return (
-    <section id="map-finder" className="relative w-full py-16 bg-brand-light-200 dark:bg-primary-deep">
+    <section id="map-finder" className="relative w-full py-16 bg-canvas-soft dark:bg-primary-deep">
       {/* ARIA Live Region for accessibility announcements */}
       <div className="sr-only" aria-live="polite" role="status">
         {announcement}
@@ -327,20 +497,20 @@ export default function ThreeDMap() {
         <p className="text-sm md:text-base text-ink/70 dark:text-canvas/70 mt-2 max-w-2xl">Hier werden alle unsere Bezugsquellen gelistet — von der gemütlichen Kneipe über den Späti bis zur Gastronomie. Täglich frisch geliefert, solange der Vorrat reicht.</p>
       </div>
 
-      <div className="max-w-7xl mx-auto flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-brand-dark-900/10 dark:border-canvas/10 bg-white dark:bg-brand-dark-900">
+      <div className="max-w-7xl mx-auto flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-brand-dark-900/10 dark:border-canvas/10 bg-canvas dark:bg-brand-dark-900">
         
         {/* Mobile View Toggles */}
-        <div className="flex lg:hidden bg-gray-50 dark:bg-brand-dark-900 border-b border-gray-100 dark:border-canvas/10 p-2 justify-center gap-2">
+        <div className="flex lg:hidden bg-canvas-soft dark:bg-brand-dark-900 border-b border-ink/10 dark:border-canvas/10 p-2 justify-center gap-2">
           <button 
             onClick={() => setMobileView('list')}
-            className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${mobileView === 'list' ? 'bg-primary text-white' : 'bg-white dark:bg-primary-deep text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-brand-dark-900 border dark:border-canvas/15'}`}
+            className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${mobileView === 'list' ? 'bg-primary text-canvas' : 'bg-canvas dark:bg-primary-deep text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-brand-dark-900 border dark:border-canvas/15'}`}
             aria-label="Ergebnisse als Liste anzeigen"
           >
             <List className="w-4 h-4" /> Liste
           </button>
           <button 
             onClick={() => setMobileView('map')}
-            className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${mobileView === 'map' ? 'bg-primary text-white' : 'bg-white dark:bg-primary-deep text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-brand-dark-900 border dark:border-canvas/15'}`}
+            className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 ${mobileView === 'map' ? 'bg-primary text-canvas' : 'bg-canvas dark:bg-primary-deep text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-brand-dark-900 border dark:border-canvas/15'}`}
             aria-label="Ergebnisse auf Karte anzeigen"
           >
             <MapPin className="w-4 h-4" /> Karte
@@ -349,29 +519,29 @@ export default function ThreeDMap() {
 
         <div className="h-[750px] flex flex-row relative">
           {/* Left Panel: Beer Finder UI & Results */}
-          <div className={`w-full lg:w-[450px] bg-white dark:bg-brand-dark-900 h-full overflow-y-auto border-r border-brand-dark-900/10 dark:border-canvas/10 z-10 flex flex-col custom-scrollbar ${mobileView === 'list' ? 'block' : 'hidden lg:flex'}`}>
+          <div className={`w-full lg:w-[450px] bg-canvas dark:bg-brand-dark-900 h-full overflow-y-auto border-r border-brand-dark-900/10 dark:border-canvas/10 z-10 flex flex-col custom-scrollbar ${mobileView === 'list' ? 'block' : 'hidden lg:flex'}`}>
             
             <div className="p-6 space-y-6">
               
               {/* Card 1: Geolocation & Search */}
-              <div className="bg-white dark:bg-primary-deep rounded-xl border border-gray-200 dark:border-canvas/10 p-5 shadow-sm">
+              <div className="bg-canvas dark:bg-primary-deep rounded-xl border border-ink/10 dark:border-canvas/10 p-5 shadow-sm">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-canvas">Standort bestimmen</h3>
-                  <CheckCircle2 className="w-5 h-5 text-primary" fill="currentColor" stroke="white" />
+                  <h3 className="text-lg font-bold text-ink dark:text-canvas">Standort bestimmen</h3>
+                  <CheckCircle2 className="w-5 h-5 text-primary" fill="currentColor" stroke="oklch(0.85 0.04 75.0)" />
                 </div>
 
                 <button 
                   onClick={handleGeolocation}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"
+                  className="w-full bg-primary hover:bg-primary/90 text-canvas font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"
                   aria-label="Aktuellen GPS-Standort verwenden"
                 >
                   <Locate className="w-4 h-4" />
                   Mein GPS-Standort
                 </button>
 
-                <div className="mt-5 pt-4 border-t border-gray-100 dark:border-canvas/10">
+                <div className="mt-5 pt-4 border-t border-ink/10 dark:border-canvas/10">
                   <form onSubmit={handleSearch} className="space-y-2">
-                    <label htmlFor="address-search" className="text-sm font-medium text-gray-700 dark:text-canvas/80 block">
+                    <label htmlFor="address-search" className="text-sm font-medium text-ink-secondary dark:text-canvas/80 block">
                       Oder Adresse eingeben:
                     </label>
                     <div className="flex gap-2">
@@ -381,11 +551,11 @@ export default function ThreeDMap() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="z.B. Nürnberg, Fürth" 
-                        className="flex-1 border border-gray-300 dark:border-canvas/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-gray-900 dark:text-canvas bg-white dark:bg-brand-dark-900"
+                        className="flex-1 border border-ink/20 dark:border-canvas/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-ink dark:text-canvas bg-canvas dark:bg-brand-dark-900"
                       />
                       <button 
                         type="submit"
-                        className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-transform active:scale-[0.98] hover:opacity-90 flex items-center gap-1"
+                        className="bg-primary text-canvas px-4 py-2 rounded-lg text-sm font-medium transition-transform active:scale-[0.98] hover:opacity-90 flex items-center gap-1"
                         aria-label="Ort suchen"
                       >
                         <Search className="w-4 h-4" />
@@ -398,15 +568,15 @@ export default function ThreeDMap() {
               {/* Card 2: Filter Options */}
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-canvas">Suchoptionen</h3>
-                  <p className="text-sm text-gray-500 dark:text-canvas/60">Filter werden automatisch angewendet</p>
+                  <h3 className="text-lg font-bold text-ink dark:text-canvas">Suchoptionen</h3>
+                  <p className="text-sm text-ink-mute dark:text-canvas/60">Filter werden automatisch angewendet</p>
                 </div>
 
                 {/* Radius Slider */}
                 <div className="pt-2">
                   <div className="flex justify-between items-center mb-3">
-                    <label htmlFor="radius-slider" className="text-sm font-medium text-gray-900 dark:text-canvas">Suchradius</label>
-                    <span className="text-sm text-gray-600 dark:text-canvas/80 font-mono font-bold">{radius} km</span>
+                    <label htmlFor="radius-slider" className="text-sm font-medium text-ink dark:text-canvas">Suchradius</label>
+                    <span className="text-sm text-ink-secondary dark:text-canvas/80 font-mono font-bold">{radius} km</span>
                   </div>
                   <input 
                     id="radius-slider"
@@ -416,26 +586,26 @@ export default function ThreeDMap() {
                     step="0.5"
                     value={radius}
                     onChange={(e) => setRadius(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-200 dark:bg-canvas/10 text-gray-200 dark:text-canvas/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                    className="w-full h-2 bg-ink/10 dark:bg-canvas/10 text-ink/10 dark:text-canvas/10 rounded-lg appearance-none cursor-pointer accent-primary"
                     style={{ background: `linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) ${(radius - 0.5) / 9.5 * 100}%, currentColor ${(radius - 0.5) / 9.5 * 100}%, currentColor 100%)` }}
                   />
                 </div>
 
                 {/* High-Contrast Toggle Badges */}
-                <div className="pt-2 border-t border-gray-100 dark:border-canvas/10 space-y-3">
+                <div className="pt-2 border-t border-ink/10 dark:border-canvas/10 space-y-3">
                   <div>
-                    <label className="text-xs font-bold text-gray-500 dark:text-canvas/50 uppercase tracking-widest block mb-2">Betriebsart</label>
+                    <label className="text-xs font-bold text-ink-mute dark:text-canvas/50 uppercase tracking-widest block mb-2">Betriebsart</label>
                     <div className="flex flex-wrap gap-2">
                       <button 
                         onClick={() => toggleFilter('gastronomy')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.gastronomy ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/80 border-gray-200 dark:border-canvas/10 hover:bg-gray-50 dark:hover:bg-primary-deep'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.gastronomy ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
                         aria-pressed={filters.gastronomy}
                       >
                         Gastronomie (On-Premise)
                       </button>
                       <button 
                         onClick={() => toggleFilter('retail')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.retail ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/80 border-gray-200 dark:border-canvas/10 hover:bg-gray-50 dark:hover:bg-primary-deep'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.retail ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
                         aria-pressed={filters.retail}
                       >
                         Einzelhandel (Off-Premise)
@@ -444,11 +614,11 @@ export default function ThreeDMap() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-gray-500 dark:text-canvas/50 uppercase tracking-widest block mb-2">Zusatzfilter</label>
+                    <label className="text-xs font-bold text-ink-mute dark:text-canvas/50 uppercase tracking-widest block mb-2">Zusatzfilter</label>
                     <div className="flex flex-wrap gap-2">
                       <button 
                         onClick={() => toggleFilter('openNow')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.openNow ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/80 border-gray-200 dark:border-canvas/10 hover:bg-gray-50 dark:hover:bg-primary-deep'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.openNow ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
                         aria-pressed={filters.openNow}
                       >
                         <Clock className="w-3.5 h-3.5" />
@@ -456,7 +626,7 @@ export default function ThreeDMap() {
                       </button>
                       <button 
                         onClick={() => toggleFilter('food')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.food ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/80 border-gray-200 dark:border-canvas/10 hover:bg-gray-50 dark:hover:bg-primary-deep'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.food ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
                         aria-pressed={filters.food}
                       >
                         <Utensils className="w-3.5 h-3.5" />
@@ -464,7 +634,7 @@ export default function ThreeDMap() {
                       </button>
                       <button 
                         onClick={() => toggleFilter('dogFriendly')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.dogFriendly ? 'bg-primary text-white border-primary' : 'bg-white dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/80 border-gray-200 dark:border-canvas/10 hover:bg-gray-50 dark:hover:bg-primary-deep'}`}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${filters.dogFriendly ? 'bg-primary text-canvas border-primary' : 'bg-canvas dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/80 border-ink/10 dark:border-canvas/10 hover:bg-canvas-soft dark:hover:bg-primary-deep'}`}
                         aria-pressed={filters.dogFriendly}
                       >
                         <PawPrint className="w-3.5 h-3.5" />
@@ -477,74 +647,76 @@ export default function ThreeDMap() {
             </div>
 
             {/* Divider */}
-            <div className="h-2 w-full bg-gray-50 dark:bg-brand-dark-900 border-y border-gray-100 dark:border-canvas/10" />
+            <div className="h-2 w-full bg-canvas-soft dark:bg-brand-dark-900 border-y border-ink/10 dark:border-canvas/10" />
 
             {/* Ordered List View (WCAG Savior) */}
-            <div className="p-6 flex-1 bg-white dark:bg-brand-dark-900">
+            <div className="p-6 flex-1 bg-canvas dark:bg-brand-dark-900">
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 ribbon bg-accent px-4 py-1.5 text-xs font-mono font-bold text-ink uppercase tracking-widest mb-3">
                   <MapPin className="w-3.5 h-3.5" />
                   Bezugsquellen
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-canvas mb-2">Atzengold Verkaufsstellen</h2>
-                <p className="text-sm text-gray-500 dark:text-canvas/60 mb-3">Hier findest du alle Orte, an denen du Atzengold bekommst — von der gemütlichen Kneipe über den Späti bis zur Gastronomie. Täglich frisch geliefert, solange der Vorrat reicht.</p>
-                <div className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                <h2 className="text-xl font-bold text-ink dark:text-canvas mb-2">Atzengold Verkaufsstellen</h2>
+                <p className="text-sm text-ink-mute dark:text-canvas/60 mb-3">Hier findest du alle Orte, an denen du Atzengold bekommst — von der gemütlichen Kneipe über den Späti bis zur Gastronomie. Täglich frisch geliefert, solange der Vorrat reicht.</p>
+                <div className="inline-block bg-primary text-canvas text-xs font-bold px-3 py-1 rounded-full">
                   {filteredVenues.length} Partner gefunden
                 </div>
               </div>
 
               <ol id="venue-list-start" tabIndex={-1} className="space-y-4 pb-20 focus:outline-none">
                 {filteredVenues.length === 0 ? (
-                  <p className="text-gray-500 dark:text-canvas/60 text-sm py-4">Keine Verkaufsstellen im ausgewählten Umkreis gefunden.</p>
+                  <p className="text-ink-mute dark:text-canvas/60 text-sm py-4">Keine Verkaufsstellen im ausgewählten Umkreis gefunden.</p>
                 ) : (
                   filteredVenues.map((venue, idx) => (
                     <li 
                       key={venue.id}
                       onClick={() => handleSelectVenue(venue)}
-                      className={`border rounded-xl p-4 transition-all cursor-pointer shadow-sm focus-within:ring-2 focus-within:ring-primary ${selectedVenue?.id === venue.id ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-gray-200 dark:border-canvas/10 hover:border-gray-300 dark:hover:border-canvas/20 bg-white dark:bg-primary-deep'}`}
+                      className={`border rounded-xl p-4 transition-all cursor-pointer shadow-sm focus-within:ring-2 focus-within:ring-primary ${selectedVenue?.id === venue.id ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-ink/10 dark:border-canvas/10 hover:border-ink/20 dark:hover:border-canvas/20 bg-canvas dark:bg-primary-deep'}`}
                     >
                       <button 
                         className="w-full text-left focus:outline-none" 
                         aria-label={`${idx + 1}. ${venue.name}, ${venue.type}, Entfernung: ${venue.distance} Kilometer. Klicken für Details.`}
                       >
                         <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-bold text-lg text-gray-900 dark:text-canvas leading-tight">{venue.name}</h4>
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${venue.isOpen ? 'bg-emerald-600 text-white' : 'bg-gray-200 dark:bg-brand-dark-900 text-gray-700 dark:text-canvas/70'}`}>
+                          <h4 className="font-bold text-lg text-ink dark:text-canvas leading-tight">{venue.name}</h4>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${venue.isOpen ? 'bg-primary text-canvas' : 'bg-ink/10 dark:bg-brand-dark-900 text-ink-secondary dark:text-canvas/70'}`}>
                             {venue.isOpen ? 'Geöffnet' : 'Geschlossen'}
                           </span>
                         </div>
 
                         <div className="flex justify-between items-center mb-3">
-                          <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-canvas/70 font-bold">
-                            <MapPin className="w-4 h-4 text-gray-400 dark:text-canvas/40" />
+                          <div className="flex items-center gap-1 text-sm text-ink-secondary dark:text-canvas/70 font-bold">
+                            <MapPin className="w-4 h-4 text-ink-mute dark:text-canvas/40" />
                             {venue.distance} km
                           </div>
-                          <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-canvas/70 font-bold">
-                            <Clock className="w-4 h-4 text-gray-400 dark:text-canvas/40" />
+                          <div className="flex items-center gap-1 text-sm text-ink-secondary dark:text-canvas/70 font-bold">
+                            <Clock className="w-4 h-4 text-ink-mute dark:text-canvas/40" />
                             {venue.openingHours}
                           </div>
                         </div>
 
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-gray-800 dark:text-canvas px-2.5 py-1 border border-gray-200 dark:border-canvas/10 bg-gray-50 dark:bg-brand-dark-900 rounded-full">
+                            <span className="text-xs font-bold text-ink dark:text-canvas px-2.5 py-1 border border-ink/10 dark:border-canvas/10 bg-canvas-soft dark:bg-brand-dark-900 rounded-full">
                               {venue.type}
                             </span>
                             {venue.hasFood && (
-                              <div className="bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 p-1.5 rounded-full" title="Speisenangebot">
+                              <div className="bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent p-1.5 rounded-full" title="Speisenangebot">
                                 <Utensils className="w-3.5 h-3.5" />
                               </div>
                             )}
                             {venue.dogFriendly && (
-                              <div className="bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 p-1.5 rounded-full" title="Hundefreundlich">
+                              <div className="bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary p-1.5 rounded-full" title="Hundefreundlich">
                                 <PawPrint className="w-3.5 h-3.5" />
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-amber-500" fill="currentColor" />
-                            <span className="text-sm font-bold text-gray-800 dark:text-canvas">{venue.rating}</span>
-                          </div>
+                          {venue.rating && (
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 text-accent" fill="currentColor" />
+                              <span className="text-sm font-bold text-ink dark:text-canvas">{venue.rating}</span>
+                            </div>
+                          )}
                         </div>
                       </button>
                     </li>
@@ -555,8 +727,8 @@ export default function ThreeDMap() {
           </div>
 
           {/* Right Panel: MapLibre Map */}
-          <div className={`flex-1 relative h-full bg-[#EFEFE8] ${mobileView === 'map' ? 'block' : 'hidden lg:block'}`}>
-            <a href="#venue-list-start" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:text-primary focus:p-4 focus:font-bold focus:shadow-xl rounded-lg top-4 left-4 outline-none border-2 border-primary">
+          <div className={`flex-1 relative h-full bg-canvas-soft ${mobileView === 'map' ? 'block' : 'hidden lg:block'}`}>
+            <a href="#venue-list-start" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-canvas focus:text-primary focus:p-4 focus:font-bold focus:shadow-xl rounded-lg top-4 left-4 outline-none border-2 border-primary">
               Zur Liste überspringen (Skip Map)
             </a>
             
@@ -573,26 +745,26 @@ export default function ThreeDMap() {
             >
               {/* On-Map Accessibility Controls */}
               <div className="absolute top-4 right-4 flex flex-col gap-2 z-10 pointer-events-auto">
-                <div className="bg-white dark:bg-brand-dark-900 rounded-lg shadow-xl border border-gray-200 dark:border-canvas/10 overflow-hidden flex flex-col">
-                  <button onClick={handleZoomIn} aria-label="Hineinzoomen" title="Hineinzoomen" className="w-[44px] h-[44px] flex items-center justify-center text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary border-b border-gray-200 dark:border-canvas/10">
+                <div className="bg-canvas dark:bg-brand-dark-900 rounded-lg shadow-xl border border-ink/10 dark:border-canvas/10 overflow-hidden flex flex-col">
+                  <button onClick={handleZoomIn} aria-label="Hineinzoomen" title="Hineinzoomen" className="w-[44px] h-[44px] flex items-center justify-center text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary border-b border-ink/10 dark:border-canvas/10">
                     <Plus strokeWidth={3} className="w-5 h-5" />
                   </button>
-                  <button onClick={handleZoomOut} aria-label="Herauszoomen" title="Herauszoomen" className="w-[44px] h-[44px] flex items-center justify-center text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                  <button onClick={handleZoomOut} aria-label="Herauszoomen" title="Herauszoomen" className="w-[44px] h-[44px] flex items-center justify-center text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                     <Minus strokeWidth={3} className="w-5 h-5" />
                   </button>
                 </div>
 
                 {(viewport.bearing !== 0 || viewport.pitch !== 0) && (
-                  <button onClick={handleResetNorth} aria-label="Nach Norden ausrichten" title="Nach Norden ausrichten" className="w-[44px] h-[44px] bg-white dark:bg-brand-dark-900 rounded-lg shadow-xl border border-gray-200 dark:border-canvas/10 flex items-center justify-center text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
+                  <button onClick={handleResetNorth} aria-label="Nach Norden ausrichten" title="Nach Norden ausrichten" className="w-[44px] h-[44px] bg-canvas dark:bg-brand-dark-900 rounded-lg shadow-xl border border-ink/10 dark:border-canvas/10 flex items-center justify-center text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
                     <Compass className="w-5 h-5" style={{ transform: `rotate(${-viewport.bearing}deg)` }} />
                   </button>
                 )}
 
-                <button onClick={handleGeolocation} aria-label="Eigenen Standort auf der Karte finden" title="Eigenen Standort auf der Karte finden" className="w-[44px] h-[44px] bg-white dark:bg-brand-dark-900 rounded-lg shadow-xl border border-gray-200 dark:border-canvas/10 flex items-center justify-center text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
+                <button onClick={handleGeolocation} aria-label="Eigenen Standort auf der Karte finden" title="Eigenen Standort auf der Karte finden" className="w-[44px] h-[44px] bg-canvas dark:bg-brand-dark-900 rounded-lg shadow-xl border border-ink/10 dark:border-canvas/10 flex items-center justify-center text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
                   <Locate className="w-5 h-5" />
                 </button>
 
-                <button onClick={handleToggleContrast} aria-label={highContrast ? "Standard-Kontrast aktivieren" : "Hohen Kontrast aktivieren"} title="Karten-Kontrast umschalten" className="w-[44px] h-[44px] bg-white dark:bg-brand-dark-900 rounded-lg shadow-xl border border-gray-200 dark:border-canvas/10 flex items-center justify-center text-gray-700 dark:text-canvas hover:bg-gray-100 dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
+                <button onClick={handleToggleContrast} aria-label={highContrast ? "Standard-Kontrast aktivieren" : "Hohen Kontrast aktivieren"} title="Karten-Kontrast umschalten" className="w-[44px] h-[44px] bg-canvas dark:bg-brand-dark-900 rounded-lg shadow-xl border border-ink/10 dark:border-canvas/10 flex items-center justify-center text-ink-secondary dark:text-canvas hover:bg-canvas-soft dark:hover:bg-primary-deep hover:text-accent focus:outline-none focus:ring-2 focus:ring-primary">
                   <Layers className="w-5 h-5" />
                 </button>
               </div>
@@ -600,7 +772,7 @@ export default function ThreeDMap() {
               {/* User Location Marker */}
               {userLocation && (
                 <Marker longitude={userLocation.longitude} latitude={userLocation.latitude} anchor="center">
-                  <div className="w-6 h-6 bg-blue-600 rounded-full border-2 border-white shadow-xl animate-pulse" />
+                  <div className="w-6 h-6 bg-accent rounded-full border-2 border-canvas shadow-xl animate-pulse" />
                 </Marker>
               )}
 
@@ -613,7 +785,7 @@ export default function ThreeDMap() {
                   return (
                     <Marker key={`cluster-${cluster.id}`} longitude={longitude} latitude={latitude} anchor="center">
                       <button
-                        className="w-[44px] h-[44px] bg-ink text-white font-bold rounded-full shadow-2xl border-4 border-white flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-primary/50 transform transition-transform hover:scale-110 cursor-pointer pointer-events-auto"
+                        className="w-[44px] h-[44px] bg-ink text-canvas font-bold rounded-full shadow-2xl border-4 border-canvas flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-primary/50 transform transition-transform hover:scale-110 cursor-pointer pointer-events-auto"
                         aria-label={`${pointCount} Standorte in diesem Bereich. Klicken zum Vergrößern.`}
                         onClick={() => {
                           const expansionZoom = Math.min(supercluster.getClusterExpansionZoom(cluster.id), 20);
@@ -640,10 +812,10 @@ export default function ThreeDMap() {
                       className={`relative group cursor-pointer focus:outline-none focus:ring-4 focus:ring-primary/50 rounded-full w-[44px] h-[44px] flex items-center justify-center pointer-events-auto transition-all duration-300 ${isSelected ? 'scale-125 z-30' : 'z-10'}`}
                       aria-label={`Markierung für ${venue.name} anzeigen`}
                     >
-                      <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white shadow-xl border-2 border-white transform transition-transform group-hover:scale-110 ${isSelected ? 'bg-emerald-500 ring-4 ring-emerald-500/30' : (venue.isGastronomy ? 'bg-primary' : 'bg-ink')}`}>
+                      <div className={`w-9 h-9 rounded-full flex items-center justify-center text-canvas shadow-xl border-2 border-canvas transform transition-transform group-hover:scale-110 ${isSelected ? 'bg-accent ring-4 ring-accent/30' : (venue.isGastronomy ? 'bg-primary' : 'bg-ink')}`}>
                         <MapPin className="w-4 h-4" />
                       </div>
-                      <div className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-8 absolute bottom-0 left-1/2 -translate-x-1/2 ${isSelected ? 'border-t-emerald-500' : (venue.isGastronomy ? 'border-t-primary' : 'border-t-ink')}`} />
+                      <div className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-8 absolute bottom-0 left-1/2 -translate-x-1/2 ${isSelected ? 'border-t-accent' : (venue.isGastronomy ? 'border-t-primary' : 'border-t-ink')}`} />
                     </button>
                   </Marker>
                 );
@@ -653,13 +825,13 @@ export default function ThreeDMap() {
             {/* Custom high-contrast Location Detail Card overlay */}
             {selectedVenue && (
               <div 
-                className="absolute bottom-4 left-4 right-4 bg-white dark:bg-brand-dark-900 border border-gray-200 dark:border-canvas/10 p-5 rounded-2xl shadow-2xl z-40 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all"
+                className="absolute bottom-4 left-4 right-4 bg-canvas dark:bg-brand-dark-900 border border-ink/10 dark:border-canvas/10 p-5 rounded-2xl shadow-2xl z-40 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all"
                 role="dialog"
                 aria-label={`Details zu ${selectedVenue.name}`}
               >
                 <button 
                   onClick={() => setSelectedVenue(null)} 
-                  className="absolute top-3 right-3 p-1.5 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary rounded-full bg-gray-50 dark:bg-primary-deep border border-gray-200 dark:border-canvas/10"
+                  className="absolute top-3 right-3 p-1.5 text-ink-mute hover:text-ink-secondary focus:outline-none focus:ring-2 focus:ring-primary rounded-full bg-canvas-soft dark:bg-primary-deep border border-ink/10 dark:border-canvas/10"
                   aria-label="Schließen"
                 >
                   <X className="w-5 h-5" />
@@ -670,13 +842,13 @@ export default function ThreeDMap() {
                     <span className="text-xs font-bold font-mono uppercase tracking-widest text-primary bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded">
                       {selectedVenue.type}
                     </span>
-                    <span className="text-xs font-bold text-gray-500 dark:text-canvas/50 font-mono">
+                    <span className="text-xs font-bold text-ink-mute dark:text-canvas/50 font-mono">
                       Nur als Flasche verfügbar (0,5l)
                     </span>
                   </div>
-                  <h4 className="font-display text-xl text-gray-900 dark:text-canvas font-bold leading-tight mt-1">{selectedVenue.name}</h4>
-                  <p className="text-sm text-gray-700 dark:text-canvas/80">{selectedVenue.address}</p>
-                  <div className="flex flex-wrap gap-x-4 text-xs font-bold text-gray-600 dark:text-canvas/60 mt-2 font-mono">
+                  <h4 className="font-display text-xl text-ink dark:text-canvas font-bold leading-tight mt-1">{selectedVenue.name}</h4>
+                  <p className="text-sm text-ink-secondary dark:text-canvas/80">{selectedVenue.address}</p>
+                  <div className="flex flex-wrap gap-x-4 text-xs font-bold text-ink-secondary dark:text-canvas/60 mt-2 font-mono">
                     <span>Entfernung: {selectedVenue.distance} km</span>
                     <span>•</span>
                     <span>Öffnungszeiten: {selectedVenue.openingHours}</span>
@@ -688,7 +860,7 @@ export default function ThreeDMap() {
                     href={`https://maps.google.com/?q=${selectedVenue.latitude},${selectedVenue.longitude}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 md:flex-initial bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-6 rounded-xl text-center shadow-lg transition-transform active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="flex-1 md:flex-initial bg-primary hover:bg-primary/90 text-canvas font-bold py-3.5 px-6 rounded-xl text-center shadow-lg transition-transform active:scale-[0.98] flex items-center justify-center gap-2"
                   >
                     <Navigation className="w-5 h-5" /> Wegbeschreibung
                   </a>
@@ -697,6 +869,10 @@ export default function ThreeDMap() {
             )}
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 mt-10">
+        <NewsletterSignup lang="de" onOpenDatenschutz={onOpenDatenschutz} />
       </div>
     </section>
   );

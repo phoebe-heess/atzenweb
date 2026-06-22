@@ -11,8 +11,13 @@ export const config = {
 const SETTINGS_KEY = 'ag:settings';
 
 async function getStripeKey(): Promise<string | null> {
-  const settings: any = await kv.get(SETTINGS_KEY);
-  return settings?.stripeSecretKey || null;
+  let settings: any = null;
+  try {
+    settings = await kv.get(SETTINGS_KEY);
+  } catch {
+    // KV not configured (e.g. Admin disabled) — fall back to env var below
+  }
+  return settings?.stripeSecretKey || process.env.STRIPE_SECRET_KEY || null;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

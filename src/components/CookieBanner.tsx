@@ -76,13 +76,9 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
     if (onTriggerNotification) {
       let toastMsg = '';
       if (lang === 'en') {
-        toastMsg = marketing 
-          ? '🍪 Cookie Preferences Saved: Marketing and analytics tracking activated!' 
+        toastMsg = marketing
+          ? '🍪 Cookie Preferences Saved: Marketing and analytics tracking activated!'
           : '🍪 Cookie Preferences Saved: Essential-only storage activated.';
-      } else if (lang === 'de-BY') {
-        toastMsg = marketing 
-          ? '🍪 Keks-Auswahl gspeichert: Marketing & Werbung is fei eingeschalten!' 
-          : '🍪 Keks-Auswahl gspeichert: Bloß des Wichtigste derf gspeichert wern.';
       } else {
         toastMsg = marketing 
           ? '🍪 Cookie-Präferenzen gespeichert: Marketing- und Analyse-Cookies aktiviert!' 
@@ -110,8 +106,6 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
     if (onTriggerNotification) {
       const toastMsg = lang === 'en'
         ? '🍪 All cookies accepted! Highly personalized street analytics online.'
-        : lang === 'de-BY'
-        ? '🍪 Sacklzement, danke! Alle Kekselins gnehmigt, mir startn de Brauerei-Motorn.'
         : '🍪 Alle Cookies akzeptiert! Optimierte Marketing- und Personalisierungsfunktionen aktiv.';
       onTriggerNotification(toastMsg);
     }
@@ -135,8 +129,6 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
     if (onTriggerNotification) {
       const toastMsg = lang === 'en'
         ? '🍪 Disallowed optional cookies. Running in core essential-only privacy mode.'
-        : lang === 'de-BY'
-        ? '🍪 Optionale Kekserl abglehnt. Bloß des allernötigste System lauft.'
         : '🍪 Optionale Cookies abgelehnt. Nur essenzielle Funktionen sind aktiv.';
       onTriggerNotification(toastMsg);
     }
@@ -154,7 +146,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
   // Local translations for high fidelity
   const localT = {
     de: {
-      brand: "Beyond Beer x Atzengold",
+      brand: "Atzengold - von der Strasse für die Strasse",
       title: "Wir schützen Ihre Privatsphäre",
       desc: "Auf dieser Website kommen Cookies und ähnliche Technologien zum Einsatz, die der Leistungsoptimierung, der Personalisierung von Anzeigen sowie weiteren Marketing- und/oder Analysezwecken dienen können. Über die unten stehenden Funktionen haben Sie die Möglichkeit, Ihr Einwilligungsverhalten zu steuern, also Einwilligungen zu erteilen, zu verweigern oder zu widerrufen.",
       privacy: "Datenschutzerklärung",
@@ -168,23 +160,8 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
       acceptAll: "Alles akzeptieren",
       powered: "Powered by Usercentrics Consent Management & IT-Recht Kanzlei"
     },
-    'de-BY': {
-      brand: "Beyond Beer x Atzengold",
-      title: "Mir schützn Dei Privatsphärn",
-      desc: "Auf dera Netzseitn kemma Cookies und so Zeigl zum Einsatz, de wos für de Leistungsoptimierung, Personalisierung von Anzeigen und Marketing gbraucht wern. Über de Knöpf unten kannst dei Einverständnis steuern, oiso ja sogn, na sogn oder des wiedarufn. Mach der fei koa Sorchn!",
-      privacy: "Datenschutz-Erklärung (Datenschutz-Zettl)",
-      imprint: "Impressum (Wer mir san)",
-      marketing: "Gschäft & Marketing Trackers",
-      functional: "Funktionelle Spielereien",
-      essential: "Essenziell (Muss-Kekserl)",
-      more: "Mehr seng",
-      save: "Speichern",
-      decline: "Sacklzement ablehnen",
-      acceptAll: "Alles akzeptieren / Prost!",
-      powered: "Gfüttert durch Usercentrics Consent Management & IT-Recht Kanzlei"
-    },
     en: {
-      brand: "Beyond Beer x Atzengold",
+      brand: "Atzengold - From the Street, For the Street",
       title: "We value and protect your privacy",
       desc: "On this website, cookies and similar technologies are used, which may serve the purpose of performance optimization, personalization of ads, and other marketing and/or analysis purposes. Via the settings below, you have the option to control your consent preferences, granting, refusing, or withdrawing permissions at all times.",
       privacy: "Privacy Policy",
@@ -203,7 +180,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
   const activeT = localT[lang] || localT.de;
 
   return (
-    <div className="fixed inset-0 bg-ink/60 dark:bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 bg-ink/60 dark:bg-ink/85 z-50 flex items-center justify-center p-4 backdrop-blur-md animate-fadeIn">
       <motion.div 
         id="cookie-consent-modal"
         initial={{ scale: 0.95, opacity: 0 }}
@@ -312,7 +289,7 @@ export default function CookieBanner({ lang, onConsentSaved, onTriggerNotificati
                   <span className="text-sm font-bold text-ink-mute dark:text-canvas/40 uppercase tracking-wide">{activeT.essential}</span>
                   <div className="w-12 h-6 rounded-full bg-ink/10 dark:bg-canvas/10 flex items-center p-1 relative cursor-not-allowed opacity-80 shadow-inner">
                     <div className="bg-canvas dark:bg-canvas w-4 h-4 rounded-full flex items-center justify-center translate-x-[24px] shadow-sm">
-                      <Check className="h-2.5 w-2.5 text-emerald-600 dark:text-emerald-500 stroke-3" />
+                      <Check className="h-2.5 w-2.5 text-primary dark:text-primary stroke-3" />
                     </div>
                   </div>
                 </div>
