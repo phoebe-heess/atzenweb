@@ -10,16 +10,86 @@ interface RawTestimonial {
   textDE: string;
   textEN: string;
   image: string;
-  location: string;
+  location?: string;
   untappdUrl?: string;
 }
 
-// TODO: Echte Untappd-Bewertungen eintragen, sobald Gabriel die Links schickt
-// ("Ich schicke dir die jeweiligen Links noch zu"). Bis dahin bleibt die Liste
-// leer und der Bereich wird unten ausgeblendet, statt erfundene Stimmen zu zeigen.
-// Erwartetes Format pro Eintrag:
-// { id, name, role, textDE, textEN, image, location, untappdUrl }
-const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [];
+// Echte Untappd-Bewertungen (von Gabriel zugeschickt).
+const dicebearAvatar = (name: string) =>
+  `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=d4af37&textColor=1a1a1a`;
+
+const FALLBACK_TESTIMONIALS_RAW: RawTestimonial[] = [
+  {
+    id: 't1',
+    name: 'Andreas Opitz',
+    role: 'Untappd Review',
+    textDE: 'Ein richtig geiles handwerkliches Bier. Getreidig-malzig, a bissel Butter, Kellerfeuchte, ein leichter Einschlag von Karamell und Vanille, im Antrunk Fruchtsüße. Weiter so!',
+    textEN: 'A really great craft beer. Grainy-malty, a touch of butter, cellar dampness, a light hint of caramel and vanilla, with fruity sweetness on the first sip. Keep it up!',
+    image: dicebearAvatar('Andreas Opitz'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/cabdriver86/checkin/1576310093',
+  },
+  {
+    id: 't2',
+    name: 'Matthias Ress',
+    role: 'Untappd Review',
+    textDE: 'Süffig. Lecker. Charaktervoll, exotisch. Leicht bitter, hopfig.',
+    textEN: 'Smooth drinking. Tasty. Full of character, exotic. Slightly bitter, hoppy.',
+    image: dicebearAvatar('Matthias Ress'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/Ressman/checkin/1576100073',
+  },
+  {
+    id: 't3',
+    name: 'fixerfuchs',
+    role: 'Untappd Review',
+    textDE: 'Mei war des Gut, hätte das ganze Fass getrunken wenn mich keiner gestoppt hätte.',
+    textEN: "Man, that was good — I would've drunk the whole keg if nobody had stopped me.",
+    image: dicebearAvatar('fixerfuchs'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/fixerfuchs/checkin/1576491182',
+  },
+  {
+    id: 't4',
+    name: 'Matze M',
+    role: 'Untappd Review',
+    textDE: 'Sehr süffig, wunderbar weich, getreidig und angenehm malzig.',
+    textEN: 'Very smooth drinking, wonderfully soft, grainy and pleasantly malty.',
+    image: dicebearAvatar('Matze M'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/Matze_M/checkin/1553617052',
+  },
+  {
+    id: 't5',
+    name: 'Flo Luis',
+    role: 'Untappd Review',
+    textDE: 'Solides Gebräu. Für Helles sogar charakteristische Substanz da, nicht negativ gemeint.',
+    textEN: 'Solid brew. Even has notable character for a Helles — meant as a compliment.',
+    image: dicebearAvatar('Flo Luis'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/Ludmanez/checkin/1535741920',
+  },
+  {
+    id: 't6',
+    name: 'Toni Debupi',
+    role: 'Untappd Review',
+    textDE: 'Würziges und leckeres Bierchen.',
+    textEN: 'A spicy and tasty little beer.',
+    image: dicebearAvatar('Toni Debupi'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/Tonidebupi/checkin/1524666780',
+  },
+  {
+    id: 't7',
+    name: 'Julian P',
+    role: 'Untappd Review',
+    textDE: "Getreidig-malzig, 'Kellernote', Vanille(pudding) - alles dabei!",
+    textEN: "Grainy-malty, a 'cellar note', vanilla (pudding) — it's all there!",
+    image: dicebearAvatar('Julian P'),
+    location: undefined,
+    untappdUrl: 'https://untappd.com/user/loads0411/checkin/1576310165',
+  },
+];
 
 export default function Testimonials({ lang = 'de' }: { lang?: string }) {
   const [rawTestimonials, setRawTestimonials] = useState<RawTestimonial[]>(FALLBACK_TESTIMONIALS_RAW);

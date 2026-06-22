@@ -46,13 +46,10 @@ export const TestimonialsColumn = (props: {
                 const rotationClass = rotations[i % rotations.length];
 
                 const crestSrc = location ? CREST_URLS[location] : '/favicon.png';
-                const CardTag = untappdUrl ? motion.a : motion.div;
-                const cardLinkProps = untappdUrl ? { href: untappdUrl, target: '_blank', rel: 'noreferrer' } : {};
 
                 return (
-                  <CardTag
-                    {...cardLinkProps}
-                    className={`p-8 rounded-xl bg-canvas dark:bg-brand-dark-900 text-ink dark:text-canvas shadow-lg hover:shadow-2xl transition-all duration-300 max-w-xs w-full relative group transform ${rotationClass} hover:rotate-0 hover:scale-105 hover:z-20 ${untappdUrl ? 'cursor-pointer' : ''}`}
+                  <motion.div
+                    className={`p-8 rounded-xl bg-canvas dark:bg-brand-dark-900 text-ink dark:text-canvas shadow-lg hover:shadow-2xl transition-all duration-300 max-w-xs w-full relative group transform ${rotationClass} hover:rotate-0 hover:scale-105 hover:z-20`}
                     key={i}
                   >
                     {/* Paper texture overlay */}
@@ -93,9 +90,19 @@ export const TestimonialsColumn = (props: {
                       <div className="flex flex-col">
                         <div className="font-bold text-sm tracking-tight text-ink dark:text-canvas leading-tight uppercase">{name}</div>
                         <div className="text-caption text-ink-mute dark:text-canvas/50 mt-0.5">{role}</div>
+                        {untappdUrl && (
+                          <a
+                            href={untappdUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-caption text-accent hover:underline mt-1 inline-block relative z-20"
+                          >
+                            via Untappd ↗
+                          </a>
+                        )}
                       </div>
                     </div>
-                  </CardTag>
+                  </motion.div>
                 );
               })}
             </React.Fragment>

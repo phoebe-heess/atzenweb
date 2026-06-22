@@ -415,18 +415,12 @@ html.dark .halftone-overlay::after {
   }
 }
 
-/* ── Sticker Effect for Timeline Years ── */
+/* ── Year Badge for Timeline ── */
 .year-sticker {
-  background:
-    linear-gradient(15deg, transparent 35%, oklch(0.85 0.04 75.0 / 0.95) 49.5% 50.5%, transparent 65%),
-    linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-primary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  -webkit-text-stroke: 0.14em var(--color-canvas);
-  paint-order: stroke fill;
-  filter: drop-shadow(0.06em 0.06em 0.04em rgba(0, 0, 0, 0.12));
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: 0.5em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Respect user motion preferences */

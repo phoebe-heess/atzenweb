@@ -254,11 +254,11 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                     opacity: isActive ? 1 : 0.3
                   }}
                   transition={{ duration: 0.4 }}
-                  className="relative min-h-screen"
+                  className="relative min-h-[55vh]"
                 >
-                  <div className="flex items-start gap-8 relative pt-[30vh]">
+                  <div className="flex items-start gap-8 relative pt-[15vh]">
                     {/* Sticky Date/Year Column (col-span-3 equivalent) */}
-                    <div className="sticky top-[30vh] z-20 self-start flex items-center shrink-0 w-24">
+                    <div className="sticky top-[15vh] z-20 self-start flex items-center shrink-0 w-24">
                       {node.gifUrl && (
                         <img
                           src={node.gifUrl}
@@ -287,7 +287,7 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
                     </div>
 
                     {/* Description and Title Column (col-span-9 equivalent) */}
-                    <div className="relative flex-1 pb-[50vh]">
+                    <div className="relative flex-1 pb-16">
                       {/* Large Year Watermark */}
                       <span className="absolute left-0 -top-12 text-7xl font-mono font-black text-ink/5 dark:text-canvas/5 select-none pointer-events-none">
                         {node.year}
@@ -343,7 +343,7 @@ export default function StoryAndBrew({ lang }: StoryAndBrewProps) {
         </div>
 
         {/* Mobile Stacked Timeline Layout (less than lg) */}
-        <div className="block lg:hidden space-y-16 mb-24 pl-6 ml-2 border-l-2 border-dashed border-ink/20">
+        <div className="block lg:hidden space-y-10 mb-24 pl-6 ml-2 border-l-2 border-dashed border-ink/20">
           {storyNodes.map((node) => (
             <div key={node.id} className="relative">
               {/* Timeline Dot */}
